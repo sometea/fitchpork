@@ -14,10 +14,8 @@ import { ArticlesService } from './articles.service';
 export class AppComponent {
   title = 'app';
   user: Observable<firebase.User>;
-  items: FirebaseListObservable<any[]>;
 
   constructor(public afAuth: AngularFireAuth, public articlesService: ArticlesService) {
-    this.items = articlesService.getArticles();
     this.user = this.afAuth.authState;
   }
 
@@ -27,5 +25,13 @@ export class AppComponent {
 
   logout() {
     this.afAuth.auth.signOut();
+  }
+
+  addArticle() {
+    const newArticle = {
+      title: 'A new article',
+      body: 'Just added!'
+    };
+    this.articlesService.addArticle(newArticle);
   }
 }
