@@ -14,4 +14,7 @@ export class ArticlesService {
     });
   }
 
+  addArticle(article) {
+    this.getArticles().push(article);
+  }
 }
