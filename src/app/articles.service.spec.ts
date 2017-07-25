@@ -9,9 +9,9 @@ describe('ArticlesService', () => {
     const angularFireDatabaseStub = {
       list() {
         return {
-          push() {
-          }
-        }
+          value: 'test',
+          push () { }
+        };
       }
     };
 
@@ -27,18 +27,8 @@ describe('ArticlesService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should get some articles from firebase', inject([ArticlesService], (service: ArticlesService) => {
-    const listSpy = spyOn(service.af, 'list');
-    service.getArticles();
-    expect(listSpy).toHaveBeenCalled();
-  }));
-
    it('should add a new article', inject([ArticlesService], (service: ArticlesService) => {
-     const listStub = {
-        push (article) {}
-     };
-     const listSpy = spyOn(service.af, 'list').and.returnValue(listStub);
-     const pushSpy = spyOn(listStub, 'push');
+     const pushSpy = spyOn(service.getArticles(), 'push');
      const testArticle = {
        title: 'test'
      };
