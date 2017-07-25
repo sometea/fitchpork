@@ -1,10 +1,11 @@
 import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
+import { ArticlesService } from './articles.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseApp } from 'angularfire2';
 import { AngularFireDatabase } from "angularfire2/database";
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -18,9 +19,9 @@ describe('AppComponent', () => {
       }
     };
 
-    const angularFireDatabaseStub = {
-      list () {
-        return Promise.resolve([]);
+    const articlesServiceStub = {
+      getArticles () {
+        return Observable.of([]);
       }
     };
 
@@ -30,7 +31,7 @@ describe('AppComponent', () => {
       ],
       providers: [
         { provide: AngularFireAuth, useValue: angularFireAuthStub },
-        { provide: AngularFireDatabase, useValue: angularFireDatabaseStub },
+        { provide: ArticlesService, useValue: articlesServiceStub },
       ]
     }).compileComponents();
   }));

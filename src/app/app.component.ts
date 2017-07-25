@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
+import { ArticlesService } from './articles.service';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +16,8 @@ export class AppComponent {
   user: Observable<firebase.User>;
   items: FirebaseListObservable<any[]>;
 
-  constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
-    this.items = af.list('/articles', {
-      query: {
-        limitToLast: 50
-      }
-    });
+  constructor(public afAuth: AngularFireAuth, public articlesService: ArticlesService) {
+    this.items = articlesService.getArticles();
     this.user = this.afAuth.authState;
   }
 
