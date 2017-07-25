@@ -20,4 +20,8 @@ export class ArticlesService {
   addArticle(article) {
     this.items.push(article);
   }
+
+  removeArticle(key: string) {
+    this.items.remove(key);
+  }
 }

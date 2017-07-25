@@ -34,4 +34,8 @@ export class AppComponent {
     };
     this.articlesService.addArticle(newArticle);
   }
+
+  removeArticle(key: string) {
+    this.articlesService.removeArticle(key);
+  }
 }
