@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Article } from "./edit-article/article";
 
 @Injectable()
 export class ArticlesService {
@@ -13,11 +14,11 @@ export class ArticlesService {
     });
   }
 
-  getArticles() {
+  getArticles(): FirebaseListObservable<Article[]> {
     return this.items;
   }
 
-  addArticle(article) {
+  addArticle(article: Article) {
     this.items.push(article);
   }
 

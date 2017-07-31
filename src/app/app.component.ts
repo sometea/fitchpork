@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import { ArticlesService } from './articles.service';
+import { Article } from "./edit-article/article";
 
 @Component({
   selector: 'app-root',
@@ -28,9 +29,10 @@ export class AppComponent {
   }
 
   addArticle() {
-    const newArticle = {
+    const newArticle: Article = {
       title: 'A new article',
-      body: 'Just added!'
+      text: 'Just added!',
+      date: 'Today'
     };
     this.articlesService.addArticle(newArticle);
   }

@@ -4,8 +4,8 @@
   <div id="userid" *ngIf="(user | async)?.uid">User ID: {{ (user | async)?.uid }}</div>
 
   <div id="details-container">
-      <p *ngFor="let item of articlesService.getArticles() | async">
-        <strong>{{ item.title }}</strong> {{ item.body }} <strong (click)="removeArticle(item.$key)">-</strong>
+      <p *ngFor="let article of articlesService.getArticles() | async">
+        <app-edit-article [article]="article"></app-edit-article>
       </p>
       <button (click)="addArticle()">+</button>
   </div>
