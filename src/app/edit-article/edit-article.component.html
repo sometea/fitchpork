@@ -1,4 +1,5 @@
 <div *ngIf="article">
-  <strong>{{ article.title }}</strong> - {{ article.date }}<br/>
-  {{ article.text }}
+  <strong>{{ article.title }}</strong> - {{ article.date }} - {{ key }}<br/>
+  {{ article.text }}<br/>
+  <span (click)="emitRemove()">Remove</span>
 </div>

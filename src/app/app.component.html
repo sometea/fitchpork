@@ -5,7 +5,7 @@
 
   <div id="details-container">
       <p *ngFor="let article of articlesService.getArticles() | async">
-        <app-edit-article [article]="article"></app-edit-article>
+        <app-edit-article [article]="article" [key]="article.$key" (onRemove)="removeArticle($event)"></app-edit-article>
       </p>
       <button (click)="addArticle()">+</button>
   </div>
