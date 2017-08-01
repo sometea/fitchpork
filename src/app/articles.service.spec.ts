@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 
 import { ArticlesService } from './articles.service';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Article } from './edit-article/article';
 
 describe('ArticlesService', () => {
   beforeEach(() => {
@@ -29,8 +30,10 @@ describe('ArticlesService', () => {
 
    it('should add a new article', inject([ArticlesService], (service: ArticlesService) => {
      const pushSpy = spyOn(service.getArticles(), 'push');
-     const testArticle = {
-       title: 'test'
+     const testArticle: Article = {
+       title: 'test',
+       date: 'today',
+       text: 'random'
      };
      service.addArticle(testArticle);
      expect(pushSpy).toHaveBeenCalled();

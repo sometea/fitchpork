@@ -6,17 +6,17 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseApp } from 'angularfire2';
 import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from 'rxjs';
+import { AuthenticationService } from './authentication.service';
+import { EditArticleComponent } from './edit-article/edit-article.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
-    const angularFireAuthStub = {
-      authState: Observable.of({
-        uid: '1',
-      }),
-      auth: {
-        signInAnonymously() {},
-        signOut() {}
-      }
+    const authenticationServiceStub = {
+      getAuthState() {
+        return Observable.of({ uid: '1' });
+      },
+      login() { },
+      logout() { }
     };
 
     const articlesServiceStub = {
@@ -27,10 +27,11 @@ describe('AppComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        EditArticleComponent
       ],
       providers: [
-        { provide: AngularFireAuth, useValue: angularFireAuthStub },
+        { provide: AuthenticationService, useValue: authenticationServiceStub },
         { provide: ArticlesService, useValue: articlesServiceStub },
       ]
     }).compileComponents();

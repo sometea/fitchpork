@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 import { FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import { ArticlesService } from './articles.service';
 import { Article } from "./edit-article/article";
+import { AuthenticationService } from "./authentication.service";
 
 @Component({
   selector: 'app-root',
@@ -16,16 +16,16 @@ export class AppComponent {
   title = 'app';
   user: Observable<firebase.User>;
 
-  constructor(public afAuth: AngularFireAuth, public articlesService: ArticlesService) {
-    this.user = this.afAuth.authState;
+  constructor(private auth: AuthenticationService, private articlesService: ArticlesService) {
+    this.user = this.auth.getAuthState();
   }
 
   login() {
-    this.afAuth.auth.signInAnonymously();
+    this.auth.login();
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    this.auth.logout();
   }
 
   addArticle() {

@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Article } from './article';
+import { AuthenticationService } from '../authentication.service';
+import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-edit-article',
@@ -11,7 +14,12 @@ export class EditArticleComponent implements OnInit {
   @Input() key: string;
   @Output() onRemove = new EventEmitter<string>();
 
-  constructor() { }
+  user: Observable<firebase.User>;
+
+
+  constructor(private auth: AuthenticationService) {
+      this.user = auth.getAuthState();
+   }
 
   ngOnInit() {
   }
