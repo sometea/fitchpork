@@ -24,6 +24,10 @@ export class EditArticleComponent implements OnInit {
   ngOnInit() {
   }
 
+  loggedIn(): Observable<boolean> {
+    return this.user.map(u => (u.uid !== ''));
+  }
+
   emitRemove() {
     this.onRemove.emit(this.key);
   }

@@ -1,8 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { EditArticleComponent } from './edit-article.component';
 import { AuthenticationService } from "../authentication.service";
 import { Observable } from "rxjs/Observable";
+import { Article } from "./article";
 
 describe('EditArticleComponent', () => {
   let component: EditArticleComponent;
@@ -11,7 +12,7 @@ describe('EditArticleComponent', () => {
   beforeEach(async(() => {
     const authenticationServiceStub = {
       getAuthState() {
-        return Observable.of({});
+        return Observable.of({ uid: 'test' });
       },
       login() { },
       logout() { }
@@ -29,10 +30,22 @@ describe('EditArticleComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditArticleComponent);
     component = fixture.componentInstance;
+    component.article = new Article()
     fixture.detectChanges();
   });
 
   it('should be created', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should know if the user is logged in', fakeAsync(() => {
+    component.loggedIn().subscribe(loggedIn => {
+      expect(loggedIn).toBeTruthy();
+    })
+  }));
+
+  it('should have remove and edit buttons', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#edit').textContent).toContain('Edit');
   });
 });
