@@ -38,11 +38,11 @@ describe('EditArticleComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should know if the user is logged in', fakeAsync(() => {
+  it('should know if the user is logged in', () => {
     component.loggedIn().subscribe(loggedIn => {
       expect(loggedIn).toBeTruthy();
     })
-  }));
+  });
 
   it('should have remove and edit buttons', () => {
     const compiled = fixture.debugElement.nativeElement;
