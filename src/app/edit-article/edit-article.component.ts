@@ -2,6 +2,8 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Article } from './article';
 import { AuthenticationService } from '../authentication.service';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -15,17 +17,14 @@ export class EditArticleComponent implements OnInit {
   @Output() onRemove = new EventEmitter<string>();
 
   user: Observable<firebase.User>;
-
+  loggedIn: Observable<boolean>;
 
   constructor(private auth: AuthenticationService) {
       this.user = auth.getAuthState();
+      this.loggedIn = auth.getAuthState().map(user => (user !== null));
    }
 
   ngOnInit() {
-  }
-
-  loggedIn(): Observable<boolean> {
-    return this.user.map(u => (u.uid !== ''));
   }
 
   emitRemove() {

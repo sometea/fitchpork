@@ -9,15 +9,15 @@ describe('EditArticleComponent', () => {
   let component: EditArticleComponent;
   let fixture: ComponentFixture<EditArticleComponent>;
 
-  beforeEach(async(() => {
-    const authenticationServiceStub = {
+  const authenticationServiceStub = {
       getAuthState() {
-        return Observable.of({ uid: 'test' });
+        return Observable.of({ uid: '1' });
       },
       login() { },
       logout() { }
-    }
+  };
 
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ EditArticleComponent ],
       providers: [
@@ -38,14 +38,16 @@ describe('EditArticleComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should know if the user is logged in', () => {
-    component.loggedIn().subscribe(loggedIn => {
-      expect(loggedIn).toBeTruthy();
-    })
-  });
-
   it('should have remove and edit buttons', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('#edit').textContent).toContain('Edit');
+    expect(compiled.querySelector('#remove').textContent).toContain('Remove');
   });
+
+  it('should hide edit and remove buttons by default', () => {
+    component.loggedIn = Observable.of(false);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#edit')).toBeNull();
+  })
 });
