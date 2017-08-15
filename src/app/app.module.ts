@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AngularFireModule } from 'angularfire2';
@@ -25,6 +26,7 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

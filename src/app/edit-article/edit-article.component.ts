@@ -18,6 +18,7 @@ export class EditArticleComponent implements OnInit {
 
   user: Observable<firebase.User>;
   loggedIn: Observable<boolean>;
+  editingMode: boolean = false;
 
   constructor(private auth: AuthenticationService) {
       this.user = auth.getAuthState();
@@ -29,6 +30,10 @@ export class EditArticleComponent implements OnInit {
 
   emitRemove() {
     this.onRemove.emit(this.key);
+  }
+
+  edit() {
+    this.editingMode = !this.editingMode;
   }
 
 }
