@@ -25,4 +25,8 @@ export class ArticlesService {
   removeArticle(key: string) {
     this.items.remove(key);
   }
+
+  updateArticle(key: string, newArticle: Article) {
+    this.items.update(key, newArticle);
+  }
 }

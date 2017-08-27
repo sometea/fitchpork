@@ -14,6 +14,7 @@ import * as firebase from 'firebase/app';
 export class EditArticleComponent implements OnInit {
   @Input() article: Article;
   @Input() key: string;
+  @Output() onChange = new EventEmitter<[string, Article]>();
   @Output() onRemove = new EventEmitter<string>();
 
   user: Observable<firebase.User>;
@@ -34,6 +35,9 @@ export class EditArticleComponent implements OnInit {
 
   edit() {
     this.editingMode = !this.editingMode;
+    if (!this.editingMode) {
+      this.onChange.emit([this.key, this.article]);
+    }
   }
 
 }

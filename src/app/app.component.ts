@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import { ArticlesService } from './articles.service';
 import { Article } from "./edit-article/article";
-import { AuthenticationService } from "./authentication.service";
+import { AuthenticationService } from './authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -39,5 +39,9 @@ export class AppComponent {
 
   removeArticle(key: string) {
     this.articlesService.removeArticle(key);
+  }
+
+  updateArticle([key, newArticle]: [string, Article]) {
+    this.articlesService.updateArticle(key, newArticle);
   }
 }
