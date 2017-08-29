@@ -4,7 +4,7 @@
     {{ article.text }}<br/>
   </ng-container>
   <ng-container *ngIf="editingMode">
-    <form #textForm="ngForm">
+    <form #textForm="ngForm" (submit)="submit()">
       <input type="text" [(ngModel)]="article.text" name="text">
     </form>
   </ng-container>

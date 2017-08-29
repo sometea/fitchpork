@@ -29,15 +29,18 @@ export class EditArticleComponent implements OnInit {
   ngOnInit() {
   }
 
-  emitRemove() {
+  public emitRemove() {
     this.onRemove.emit(this.key);
   }
 
-  edit() {
+  public edit() {
     this.editingMode = !this.editingMode;
     if (!this.editingMode) {
-      this.onChange.emit([this.key, this.article]);
+      this.submit();
     }
   }
 
+  public submit() {
+    this.onChange.emit([this.key, this.article]);
+  }
 }
