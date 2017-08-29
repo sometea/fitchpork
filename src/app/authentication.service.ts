@@ -12,6 +12,10 @@ export class AuthenticationService {
     return this.afAuth.authState;
   }
 
+  isLoggedIn(): Observable<boolean> {
+    return this.afAuth.authState.map(user => (user !== null));
+  }
+
   login() {
     this.afAuth.auth.signInAnonymously();
   }

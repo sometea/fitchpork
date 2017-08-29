@@ -16,6 +16,9 @@ describe('AppComponent', () => {
       getAuthState() {
         return Observable.of({ uid: '1' });
       },
+      isLoggedIn() {
+        return Observable.of(true);
+      },
       login() { },
       logout() { }
     };

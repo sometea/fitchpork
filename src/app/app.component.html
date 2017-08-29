@@ -1,7 +1,7 @@
 <div class="row columns">
-  <button (click)="login()" *ngIf="!(user | async)?.uid">Anonymous Login</button>
-  <button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button>
-  <div id="userid" *ngIf="(user | async)?.uid">User ID: {{ (user | async)?.uid }}</div>
+  <button (click)="login()" *ngIf="!(loggedIn | async)">Anonymous Login</button>
+  <button (click)="logout()" *ngIf="loggedIn | async">Logout</button>
+  <div id="userid" *ngIf="loggedIn | async">User ID: {{ (user | async)?.uid }}</div>
 
   <div id="details-container">
       <p *ngFor="let article of articlesService.getArticles() | async">

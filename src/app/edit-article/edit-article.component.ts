@@ -17,13 +17,11 @@ export class EditArticleComponent implements OnInit {
   @Output() onChange = new EventEmitter<[string, Article]>();
   @Output() onRemove = new EventEmitter<string>();
 
-  user: Observable<firebase.User>;
   loggedIn: Observable<boolean>;
   editingMode: boolean = false;
 
   constructor(private auth: AuthenticationService) {
-      this.user = auth.getAuthState();
-      this.loggedIn = auth.getAuthState().map(user => (user !== null));
+      this.loggedIn = auth.isLoggedIn();
    }
 
   ngOnInit() {

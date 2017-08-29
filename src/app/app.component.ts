@@ -15,9 +15,11 @@ import { AuthenticationService } from './authentication.service';
 export class AppComponent {
   title = 'app';
   user: Observable<firebase.User>;
+  loggedIn: Observable<boolean>;
 
   constructor(private auth: AuthenticationService, private articlesService: ArticlesService) {
     this.user = this.auth.getAuthState();
+    this.loggedIn = this.auth.isLoggedIn();
   }
 
   login() {
