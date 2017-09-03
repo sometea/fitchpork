@@ -1,13 +1,15 @@
-<div class="row columns">
-  <button (click)="login()" *ngIf="!(loggedIn | async)">Anonymous Login</button>
-  <button (click)="logout()" *ngIf="loggedIn | async">Logout</button>
-  <div id="userid" *ngIf="loggedIn | async">User ID: {{ (user | async)?.uid }}</div>
-
-  <div id="details-container">
-      <p *ngFor="let article of articlesService.getArticles() | async">
-        <app-edit-article [article]="article" [key]="article.$key" (onRemove)="removeArticle($event)" (onChange)="updateArticle($event)"></app-edit-article>
-      </p>
-      <button (click)="addArticle()">+</button>
-  </div>
+<h1>Fitchpork</h1>
+<ng-container *ngIf="loggedIn | async">
+  <a href="#" (click)="addArticle()">Add an article</a>
+  <a href="#" (click)="logout()">Logout</a>
+  <span id="userid">User ID: {{ (user | async)?.uid }}</span>
+</ng-container>
+<ng-container *ngIf="!(loggedIn | async)">
+  <a href="#" (click)="login()">Anonymous Login</a>
+</ng-container>
+<div id="details-container">
+  <p *ngFor="let article of articlesService.getArticles() | async">
+    <app-edit-article [article]="article" [key]="article.$key" (onRemove)="removeArticle($event)" (onChange)="updateArticle($event)"></app-edit-article>
+  </p>
 </div>
 
