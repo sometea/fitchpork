@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ArticlesService } from './articles.service';
 import { AuthenticationService } from './authentication.service';
+import { HomeComponent } from './home/home.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAb1sj2z72ouD3rxTJ7Vm-Dp6N8QY1LfHI',
@@ -22,7 +23,8 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

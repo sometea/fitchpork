@@ -1,0 +1,6 @@
+<div id="details-container">
+    <p *ngFor="let article of articlesService.getArticles() | async">
+      <app-edit-article [article]="article" [key]="article.$key" (onRemove)="removeArticle($event)" (onChange)="updateArticle($event)"></app-edit-article>
+    </p>
+</div>
+  

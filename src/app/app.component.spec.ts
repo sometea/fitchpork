@@ -8,7 +8,8 @@ import { FirebaseApp } from 'angularfire2';
 import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-import { EditArticleComponent } from './edit-article/edit-article.component';
+import { HomeComponent } from './home/home.component';
+import { EditArticleComponent } from "./edit-article/edit-article.component";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -35,11 +36,12 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
+        HomeComponent,
         EditArticleComponent
       ],
       providers: [
         { provide: AuthenticationService, useValue: authenticationServiceStub },
-        { provide: ArticlesService, useValue: articlesServiceStub },
+        { provide: ArticlesService, useValue: articlesServiceStub }
       ]
     }).compileComponents();
   }));

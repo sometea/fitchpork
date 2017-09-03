@@ -38,12 +38,4 @@ export class AppComponent {
     };
     this.articlesService.addArticle(newArticle);
   }
-
-  removeArticle(key: string) {
-    this.articlesService.removeArticle(key);
-  }
-
-  updateArticle([key, newArticle]: [string, Article]) {
-    this.articlesService.updateArticle(key, newArticle);
-  }
 }

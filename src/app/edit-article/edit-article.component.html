@@ -5,7 +5,8 @@
   </ng-container>
   <ng-container *ngIf="editingMode">
     <form #textForm="ngForm" (submit)="submit()">
-      <input type="text" [(ngModel)]="article.text" name="text">
+      <textarea [(ngModel)]="article.text" name="text" rows="10" cols="30">
+      </textarea>
     </form>
   </ng-container>
    <ng-container *ngIf="loggedIn | async"> 
