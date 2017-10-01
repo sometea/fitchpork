@@ -7,4 +7,4 @@
 <ng-container *ngIf="!(loggedIn | async)">
   <a href="#" (click)="login()">Anonymous Login</a>
 </ng-container>
-<app-home></app-home>
+<router-outlet></router-outlet>

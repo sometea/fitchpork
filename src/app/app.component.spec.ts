@@ -1,5 +1,6 @@
 import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 import { ArticlesService } from './articles.service';
@@ -28,6 +29,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
+        RouterTestingModule
       ],
       declarations: [
         AppComponent,

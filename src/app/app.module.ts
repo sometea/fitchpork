@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -21,6 +22,11 @@ export const firebaseConfig = {
   messagingSenderId: '412599837108'
 }
 
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'articles/:id', component: ViewArticleComponent },
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +37,7 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     FormsModule,
+    RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
