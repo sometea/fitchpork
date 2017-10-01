@@ -15,11 +15,7 @@ export class EditArticleComponent implements OnInit {
   @Input() article: Article;
   @Output() onChange = new EventEmitter<Article>();
 
-  loggedIn: Observable<boolean>;
-
-  constructor(private auth: AuthenticationService) {
-      this.loggedIn = auth.isLoggedIn();
-   }
+  constructor() { }
 
   ngOnInit() {
   }

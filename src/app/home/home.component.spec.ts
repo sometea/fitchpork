@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component';
 import { EditArticleComponent } from '../edit-article/edit-article.component';
 import { ArticlesService } from '../articles.service';
 import { FormsModule } from '@angular/forms/';
+import { ViewArticleComponent } from '../view-article/view-article.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -24,6 +25,7 @@ describe('HomeComponent', () => {
       declarations: [ 
         HomeComponent,
         EditArticleComponent,
+        ViewArticleComponent,
       ],
       providers: [
         { provide: ArticlesService, useValue: articlesServiceStub }

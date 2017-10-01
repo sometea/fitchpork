@@ -10,24 +10,10 @@ describe('EditArticleComponent', () => {
   let component: EditArticleComponent;
   let fixture: ComponentFixture<EditArticleComponent>;
 
-  const authenticationServiceStub = {
-      getAuthState() {
-        return Observable.of({ uid: '1' });
-      },
-      isLoggedIn() {
-        return Observable.of(true);
-      },
-      login() { },
-      logout() { }
-  };
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ FormsModule ],
       declarations: [ EditArticleComponent ],
-      providers: [
-        { provide: AuthenticationService, useValue: authenticationServiceStub },
-      ]
     })
     .compileComponents();
   }));
@@ -42,17 +28,4 @@ describe('EditArticleComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should have remove and edit buttons', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('#edit').textContent).toContain('Edit');
-    expect(compiled.querySelector('#remove').textContent).toContain('Remove');
-  });
-
-  it('should hide edit and remove buttons by default', () => {
-    component.loggedIn = Observable.of(false);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('#edit')).toBeNull();
-  })
 });

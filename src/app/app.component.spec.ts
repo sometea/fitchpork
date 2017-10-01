@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 import { HomeComponent } from './home/home.component';
 import { EditArticleComponent } from "./edit-article/edit-article.component";
+import { ViewArticleComponent } from './view-article/view-article.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -37,7 +38,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         HomeComponent,
-        EditArticleComponent
+        EditArticleComponent,
+        ViewArticleComponent,
       ],
       providers: [
         { provide: AuthenticationService, useValue: authenticationServiceStub },
