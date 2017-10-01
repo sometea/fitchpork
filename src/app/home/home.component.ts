@@ -8,6 +8,7 @@ import { Article } from "../edit-article/article";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  private articlesBeingEdited: {[key: string]: boolean} = {};
 
   constructor(private articlesService: ArticlesService) { }
 
@@ -19,6 +20,18 @@ export class HomeComponent implements OnInit {
   }
 
   updateArticle(key: string, newArticle: Article) {
+    delete this.articlesBeingEdited[key];
     this.articlesService.updateArticle(key, newArticle);
+  }
+
+  editArticle(key: string) {
+    if (this.articlesBeingEdited[key]) {
+      delete this.articlesBeingEdited[key];
+    }
+    this.articlesBeingEdited[key] = true;
+  }
+
+  editingMode(key: string): boolean {
+    return this.articlesBeingEdited[key];
   }
 }
