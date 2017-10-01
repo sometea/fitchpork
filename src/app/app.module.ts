@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, FirebaseApp } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
@@ -13,6 +13,8 @@ import { ArticlesService } from './articles.service';
 import { AuthenticationService } from './authentication.service';
 import { HomeComponent } from './home/home.component';
 import { ViewArticleComponent } from './view-article/view-article.component';
+import { ImageComponent } from './image/image.component';
+import { ImagesStorageService } from './images-storage.service';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAb1sj2z72ouD3rxTJ7Vm-Dp6N8QY1LfHI',
@@ -25,6 +27,7 @@ export const firebaseConfig = {
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'articles/:id', component: ViewArticleComponent },
+  { path: 'image', component: ImageComponent },
 ];
 
 @NgModule({
@@ -32,7 +35,8 @@ const routes: Routes = [
     AppComponent,
     EditArticleComponent,
     HomeComponent,
-    ViewArticleComponent
+    ViewArticleComponent,
+    ImageComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,8 @@ const routes: Routes = [
   ],
   providers: [
     ArticlesService,
-    AuthenticationService
+    AuthenticationService,
+    ImagesStorageService
   ],
   bootstrap: [AppComponent]
 })
