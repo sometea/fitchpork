@@ -13,24 +13,18 @@ import { EditArticleComponent } from "./edit-article/edit-article.component";
 import { ViewArticleComponent } from './view-article/view-article.component';
 
 describe('AppComponent', () => {
+  const authenticationServiceStub = {
+    getAuthState: jasmine.createSpy('getAuthState'),
+    isLoggedIn: jasmine.createSpy('isLoggedIn').and.returnValue(Observable.of(true)),
+    login() { },
+    logout() { }
+  };
+
+  const articlesServiceStub = {
+    getArticles: jasmine.createSpy('getArticles').and.returnValue(Observable.of([])),
+  };
+
   beforeEach(async(() => {
-    const authenticationServiceStub = {
-      getAuthState() {
-        return Observable.of({ uid: '1' });
-      },
-      isLoggedIn() {
-        return Observable.of(true);
-      },
-      login() { },
-      logout() { }
-    };
-
-    const articlesServiceStub = {
-      getArticles () {
-        return Observable.of([]);
-      }
-    };
-
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -61,11 +55,13 @@ describe('AppComponent', () => {
   }));
 
   it('should render the user id', fakeAsync(() => {
+    authenticationServiceStub.getAuthState.and.returnValue(Observable.of({ uid: '1' }));
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
+    expect(authenticationServiceStub.getAuthState).toHaveBeenCalled();
     expect(compiled.querySelector('#userid').textContent).toContain('User ID: 1');
   }));
 });

@@ -11,13 +11,11 @@ describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
-  beforeEach(async(() => {
-    const articlesServiceStub = {
-      getArticles () {
-        return Observable.of([]);
-      }
-    };
+  const articlesServiceStub = {
+    getArticles: jasmine.createSpy('getArticles').and.returnValue(Observable.of([]))
+  };
 
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -43,4 +41,8 @@ describe('HomeComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should get articles from the service', () => {
+    expect(articlesServiceStub.getArticles).toHaveBeenCalled();
+  })
 });

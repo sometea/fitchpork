@@ -11,12 +11,8 @@ describe('ViewArticleComponent', () => {
   let fixture: ComponentFixture<ViewArticleComponent>;
 
   const authenticationServiceStub = {
-    getAuthState() {
-      return Observable.of({ uid: '1' });
-    },
-    isLoggedIn() {
-      return Observable.of(true);
-    },
+    getAuthState() { },
+    isLoggedIn: jasmine.createSpy('isLoggedIn').and.returnValue(Observable.of(true)),
     login() { },
     logout() { }
   };
@@ -47,6 +43,10 @@ describe('ViewArticleComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('#edit').textContent).toContain('Edit');
     expect(compiled.querySelector('#remove').textContent).toContain('Remove');
+  });
+
+  it('should check whether we are logged in', () => {
+    expect(authenticationServiceStub.isLoggedIn).toHaveBeenCalled();
   });
 
   it('should hide edit and remove buttons by default', () => {
