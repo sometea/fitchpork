@@ -11,6 +11,7 @@ import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ArticlesService } from './articles.service';
 import { AuthenticationService } from './authentication.service';
 import { HomeComponent } from './home/home.component';
+import { ViewArticleComponent } from './view-article/view-article.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAb1sj2z72ouD3rxTJ7Vm-Dp6N8QY1LfHI',
@@ -24,7 +25,8 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     EditArticleComponent,
-    HomeComponent
+    HomeComponent,
+    ViewArticleComponent
   ],
   imports: [
     BrowserModule,

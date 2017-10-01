@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     this.articlesService.removeArticle(key);
   }
 
-  updateArticle([key, newArticle]: [string, Article]) {
+  updateArticle(key: string, newArticle: Article) {
     this.articlesService.updateArticle(key, newArticle);
   }
 }

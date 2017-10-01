@@ -13,12 +13,9 @@ import * as firebase from 'firebase/app';
 })
 export class EditArticleComponent implements OnInit {
   @Input() article: Article;
-  @Input() key: string;
-  @Output() onChange = new EventEmitter<[string, Article]>();
-  @Output() onRemove = new EventEmitter<string>();
+  @Output() onChange = new EventEmitter<Article>();
 
   loggedIn: Observable<boolean>;
-  editingMode: boolean = false;
 
   constructor(private auth: AuthenticationService) {
       this.loggedIn = auth.isLoggedIn();
@@ -27,18 +24,7 @@ export class EditArticleComponent implements OnInit {
   ngOnInit() {
   }
 
-  public emitRemove() {
-    this.onRemove.emit(this.key);
-  }
-
-  public edit() {
-    this.editingMode = !this.editingMode;
-    if (!this.editingMode) {
-      this.submit();
-    }
-  }
-
   public submit() {
-    this.onChange.emit([this.key, this.article]);
+    this.onChange.emit(this.article);
   }
 }

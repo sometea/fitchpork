@@ -1,0 +1,10 @@
+<div *ngIf="article">
+  <strong>{{ article.title }}</strong> - {{ article.date }} - {{ key }}<br/>
+  <p>
+    {{ article.text }}<br/>
+  </p>
+   <ng-container *ngIf="loggedIn | async"> 
+    <span id="edit" (click)="emitEdit()">Edit</span>
+    <span id="remove" (click)="emitRemove()">Remove</span>
+   </ng-container> 
+</div>

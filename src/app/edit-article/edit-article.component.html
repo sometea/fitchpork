@@ -1,16 +1,7 @@
 <div *ngIf="article">
-  <strong>{{ article.title }}</strong> - {{ article.date }} - {{ key }}<br/>
-  <ng-container *ngIf="!editingMode">
-    {{ article.text }}<br/>
-  </ng-container>
-  <ng-container *ngIf="editingMode">
     <form #textForm="ngForm" (submit)="submit()">
       <textarea [(ngModel)]="article.text" name="text" rows="10" cols="30">
       </textarea>
+      <button type="submit">Submit</button>
     </form>
-  </ng-container>
-   <ng-container *ngIf="loggedIn | async"> 
-    <span id="edit" (click)="edit()">Edit</span>
-    <span id="remove" (click)="emitRemove()">Remove</span>
-   </ng-container> 
 </div>
