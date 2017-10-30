@@ -12,6 +12,8 @@ import { AuthenticationService } from './authentication.service';
 import { HomeComponent } from './home/home.component';
 import { EditArticleComponent } from "./edit-article/edit-article.component";
 import { ViewArticleComponent } from './view-article/view-article.component';
+import { ImageComponent } from './image/image.component';
+import { ImagesStorageService } from './images-storage.service';
 
 describe('AppComponent', () => {
   const authenticationServiceStub = {
@@ -25,6 +27,10 @@ describe('AppComponent', () => {
     getArticles: jasmine.createSpy('getArticles').and.returnValue(Observable.of([])),
   };
 
+  const imagesStorageServiceStub = {
+    
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -36,10 +42,12 @@ describe('AppComponent', () => {
         HomeComponent,
         EditArticleComponent,
         ViewArticleComponent,
+        ImageComponent,
       ],
       providers: [
         { provide: AuthenticationService, useValue: authenticationServiceStub },
-        { provide: ArticlesService, useValue: articlesServiceStub }
+        { provide: ArticlesService, useValue: articlesServiceStub },
+        { provide: ImagesStorageService, useValue: imagesStorageServiceStub },
       ]
     }).compileComponents();
   }));

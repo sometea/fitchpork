@@ -6,7 +6,7 @@ import { Article } from "./edit-article/article";
 export class ArticlesService {
   private items: FirebaseListObservable<any[]>;
 
-  constructor(public af: AngularFireDatabase) { 
+  constructor(private af: AngularFireDatabase) { 
     this.items = this.af.list('/articles', {
       query: {
         limitToLast: 50

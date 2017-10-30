@@ -6,6 +6,8 @@ import { EditArticleComponent } from '../edit-article/edit-article.component';
 import { ArticlesService } from '../articles.service';
 import { FormsModule } from '@angular/forms/';
 import { ViewArticleComponent } from '../view-article/view-article.component';
+import { ImageComponent } from '../image/image.component';
+import { ImagesStorageService } from '../images-storage.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -13,6 +15,10 @@ describe('HomeComponent', () => {
 
   const articlesServiceStub = {
     getArticles: jasmine.createSpy('getArticles').and.returnValue(Observable.of([]))
+  };
+
+  const imagesStorageServiceStub = {
+
   };
 
   beforeEach(async(() => {
@@ -24,9 +30,11 @@ describe('HomeComponent', () => {
         HomeComponent,
         EditArticleComponent,
         ViewArticleComponent,
+        ImageComponent,
       ],
       providers: [
-        { provide: ArticlesService, useValue: articlesServiceStub }
+        { provide: ArticlesService, useValue: articlesServiceStub },
+        { provide: ImagesStorageService, useValue: imagesStorageServiceStub },
       ]
     })
     .compileComponents();

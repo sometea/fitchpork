@@ -1,7 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
 import { FirebaseApp } from 'angularfire2';
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
+import 'firebase/storage';
+import { Observable } from 'rxjs';
+import 'rxjs/add/observable/fromPromise';
 
 @Injectable()
 export class ImagesStorageService {
