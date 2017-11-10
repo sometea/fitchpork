@@ -8,8 +8,11 @@ import { ImagesStorageService } from '../images-storage.service';
 })
 export class ImageComponent implements OnInit {
   public imageUrl: string;
+  public imageAlt: string;
 
-  constructor(private imagesStorageService: ImagesStorageService) { }
+  constructor(private imagesStorageService: ImagesStorageService) { 
+    this.imageAlt = 'No image loaded yet!';
+  }
 
   ngOnInit() {
   }
