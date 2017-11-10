@@ -11,6 +11,7 @@ describe('ImageComponent', () => {
   const ImagesStorageServiceStub = { 
     upload: jasmine.createSpy('upload').and.returnValue(Observable.of('testFileName')),
     getUrl: jasmine.createSpy('getUrl').and.returnValue(Observable.of('testUrl')),
+    delete: jasmine.createSpy('delete').and.returnValue(Observable.of(null)),
   };
 
   beforeEach(async(() => {
