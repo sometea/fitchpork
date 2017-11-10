@@ -18,6 +18,9 @@ export class ImagesStorageService {
    }
 
    public delete(filename: string): Observable<void> {
+      if (filename === '') {
+        return Observable.of(null);
+      }
       return Observable.fromPromise(this.storage.ref().child(filename).delete());
    }
 
