@@ -17,6 +17,10 @@ export class ImagesStorageService {
      return Observable.fromPromise(this.storage.ref().child(file.name).put(file)).map(snapshot => file.name);
    }
 
+   public update(filename: string, file: File): Observable<string> {
+     return Observable.fromPromise(this.storage.ref().child(filename).put(file)).map(snapshot => filename);
+   }
+
    public delete(filename: string): Observable<void> {
       if (filename === '') {
         return Observable.of(null);

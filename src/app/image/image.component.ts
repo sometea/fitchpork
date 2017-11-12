@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ImagesStorageService } from '../images-storage.service';
 
 @Component({
@@ -9,11 +9,10 @@ import { ImagesStorageService } from '../images-storage.service';
 export class ImageComponent implements OnInit {
   public imageUrl: string;
   public imageAlt: string;
-  private fileName: string;
+  @Input() fileName: string;
 
   constructor(private imagesStorageService: ImagesStorageService) { 
     this.imageAlt = 'No image loaded yet!';
-    this.fileName = '';
   }
 
   ngOnInit() {
