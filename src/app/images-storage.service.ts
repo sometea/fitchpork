@@ -4,34 +4,43 @@ import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { Observable } from 'rxjs';
 import 'rxjs/add/observable/fromPromise';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Injectable()
 export class ImagesStorageService {
   private storage: firebase.storage.Storage;
+  private filesInDb: FirebaseListObservable<any[]>;
 
-  constructor(private firebaseApp: FirebaseApp) {
+  constructor(private firebaseApp: FirebaseApp, private firebaseDb: AngularFireDatabase) {
       this.storage = firebaseApp.storage();
+      this.filesInDb = this.firebaseDb.list('/images');
    }
 
    public upload(file: File): Observable<string> {
-     return Observable.fromPromise(this.storage.ref().child(file.name).put(file)).map(snapshot => file.name);
+     return Observable.fromPromise(this.filesInDb.push(file.name)).flatMap(item => Observable.fromPromise(this.storage.ref().child(item.key).put(file)).map(snapshot => item.key));
    }
 
-   public update(filename: string, file: File): Observable<string> {
-     return Observable.fromPromise(this.storage.ref().child(filename).put(file)).map(snapshot => filename);
+   public update(key: string, file: File): Observable<string> {
+     return this.firebaseDb.object('/images/' + key)
+      .flatMap(filename => Observable.fromPromise(this.storage.ref().child(filename).put(file)).map(snapshot => key));
    }
 
-   public delete(filename: string): Observable<void> {
+   public delete(key: string): Observable<void> {
      let reference: firebase.storage.Reference;
      try {
-       reference = this.storage.ref().child(filename);
+       return this.firebaseDb.object('/images/' + key).flatMap(filename => {
+        reference = this.storage.ref().child(filename);
+        this.filesInDb.remove(filename);
+        return Observable.fromPromise(reference.delete());
+       });
      } catch (e) {
        return Observable.of(null);
      }
-      return Observable.fromPromise(reference.delete());
    }
 
-   public getUrl(filename: string): Observable<string> {
-     return Observable.fromPromise(this.storage.ref().child(filename).getDownloadURL());
+   public getUrl(key: string): Observable<string> {
+     return this.firebaseDb.object('/images/' + key).flatMap(filename => {
+      return Observable.fromPromise(this.storage.ref().child(filename).getDownloadURL());
+     });
    }
 }

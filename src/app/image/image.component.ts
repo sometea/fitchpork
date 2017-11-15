@@ -21,8 +21,9 @@ export class ImageComponent implements OnInit {
   handleFiles(fileList: FileList) {
     if (fileList.length > 0) {
       this.imagesStorageService
-        .delete(this.fileName)
-        .flatMap(() => this.imagesStorageService.upload(fileList.item(0)))
+        //.delete(this.fileName)
+        .upload(fileList.item(0))
+        //.flatMap(() => this.imagesStorageService.upload(fileList.item(0)))
         .flatMap(filename => {
           this.fileName = filename;
           return this.imagesStorageService.getUrl(filename);
