@@ -22,10 +22,13 @@ export class ImagesStorageService {
    }
 
    public delete(filename: string): Observable<void> {
-      if (filename === '') {
-        return Observable.of(null);
-      }
-      return Observable.fromPromise(this.storage.ref().child(filename).delete());
+     let reference: firebase.storage.Reference;
+     try {
+       reference = this.storage.ref().child(filename);
+     } catch (e) {
+       return Observable.of(null);
+     }
+      return Observable.fromPromise(reference.delete());
    }
 
    public getUrl(filename: string): Observable<string> {
