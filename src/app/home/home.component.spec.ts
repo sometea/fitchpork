@@ -17,9 +17,7 @@ describe('HomeComponent', () => {
     getArticles: jasmine.createSpy('getArticles').and.returnValue(Observable.of([]))
   };
 
-  const imagesStorageServiceStub = {
-
-  };
+  const imagesStorageServiceStub = {};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

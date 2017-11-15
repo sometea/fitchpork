@@ -2,5 +2,5 @@
   Upload image: <input #fileInput type="file" (change)="handleFiles(fileInput.files)">
 </p>
 <p>
-  <img [src]="imageUrl" [alt]="imageAlt">
+  <img *ngIf="imageUrl" [src]="imageUrl" [alt]="imageAlt">
 </p>

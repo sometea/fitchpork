@@ -3,6 +3,6 @@
       <app-view-article *ngIf="!editingMode(article.$key)" [article]="article" (onRemove)="removeArticle(article.$key)" (onEdit)="editArticle(article.$key)"></app-view-article>
       <app-edit-article *ngIf="editingMode(article.$key)" [article]="article" (onChange)="updateArticle(article.$key, $event)"></app-edit-article>
     </p>
-    <app-image [fileName]="test.png"></app-image>
+    <app-image [fileName]=""></app-image>
 </div>
   
