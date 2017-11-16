@@ -9,7 +9,7 @@ import { ImagesStorageService } from '../images-storage.service';
 export class ImageComponent implements OnInit {
   public imageUrl: string;
   public imageAlt: string;
-  @Input() fileName: string;
+  @Input() fileKey: string;
 
   constructor(private imagesStorageService: ImagesStorageService) { 
     this.imageAlt = 'No image loaded yet!';
@@ -21,12 +21,11 @@ export class ImageComponent implements OnInit {
   handleFiles(fileList: FileList) {
     if (fileList.length > 0) {
       this.imagesStorageService
-        //.delete(this.fileName)
-        .upload(fileList.item(0))
-        //.flatMap(() => this.imagesStorageService.upload(fileList.item(0)))
-        .flatMap(filename => {
-          this.fileName = filename;
-          return this.imagesStorageService.getUrl(filename);
+        .delete(this.fileKey)
+        .flatMap(() => this.imagesStorageService.upload(fileList.item(0)))
+        .flatMap(key => {
+          this.fileKey = key;
+          return this.imagesStorageService.getUrl(key);
         }).subscribe(url => {
           this.imageUrl = url;
           this.imageAlt = 'image';

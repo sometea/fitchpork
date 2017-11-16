@@ -17,30 +17,29 @@ export class ImagesStorageService {
    }
 
    public upload(file: File): Observable<string> {
-     return Observable.fromPromise(this.filesInDb.push(file.name)).flatMap(item => Observable.fromPromise(this.storage.ref().child(item.key).put(file)).map(snapshot => item.key));
+     return Observable.fromPromise(this.filesInDb.push(file.name))
+      .flatMap(item => Observable.fromPromise(this.storage.ref().child(file.name).put(file)).map(snapshot => item.key));
    }
 
    public update(key: string, file: File): Observable<string> {
      return this.firebaseDb.object('/images/' + key)
-      .flatMap(filename => Observable.fromPromise(this.storage.ref().child(filename).put(file)).map(snapshot => key));
+      .flatMap(filename => Observable.fromPromise(this.storage.ref().child(filename.$value).put(file)).map(snapshot => key));
    }
 
    public delete(key: string): Observable<void> {
-     let reference: firebase.storage.Reference;
-     try {
-       return this.firebaseDb.object('/images/' + key).flatMap(filename => {
-        reference = this.storage.ref().child(filename);
-        this.filesInDb.remove(filename);
-        return Observable.fromPromise(reference.delete());
-       });
-     } catch (e) {
-       return Observable.of(null);
-     }
+     return this.firebaseDb.object('/images/' + key)
+      .flatMap(filename =>
+        filename.$value === null ?
+          Observable.of(null) :
+          Observable.fromPromise(Promise.all([
+            this.storage.ref().child(filename.$value).delete(),
+            this.firebaseDb.object('/images/' + key).remove()
+          ])).map(x => null)
+      );
    }
 
    public getUrl(key: string): Observable<string> {
-     return this.firebaseDb.object('/images/' + key).flatMap(filename => {
-      return Observable.fromPromise(this.storage.ref().child(filename).getDownloadURL());
-     });
+     return this.firebaseDb.object('/images/' + key)
+     .flatMap(filename => Observable.fromPromise(this.storage.ref().child(filename.$value).getDownloadURL()));
    }
 }
