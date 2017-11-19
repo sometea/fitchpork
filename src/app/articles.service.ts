@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Article } from "./edit-article/article";
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ArticlesService {
   private items: FirebaseListObservable<any[]>;
 
-  constructor(private af: AngularFireDatabase) { 
+  constructor(private af: AngularFireDatabase) {
     this.items = this.af.list('/articles', {
       query: {
         limitToLast: 50
@@ -14,7 +15,7 @@ export class ArticlesService {
     });
   }
 
-  getArticles(): FirebaseListObservable<Article[]> {
+  getArticles(): Observable<Article[]> {
     return this.items;
   }
 

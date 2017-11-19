@@ -27,15 +27,4 @@ describe('ArticlesService', () => {
   it('should be created', inject([ArticlesService], (service: ArticlesService) => {
     expect(service).toBeTruthy();
   }));
-
-   it('should add a new article', inject([ArticlesService], (service: ArticlesService) => {
-     const pushSpy = spyOn(service.getArticles(), 'push');
-     const testArticle: Article = {
-       title: 'test',
-       date: 'today',
-       text: 'random'
-     };
-     service.addArticle(testArticle);
-     expect(pushSpy).toHaveBeenCalled();
-  }));
 });
