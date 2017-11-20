@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '../articles.service';
 import { Article } from "../edit-article/article";
+import { AuthenticationService } from '../authentication.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +11,11 @@ import { Article } from "../edit-article/article";
 })
 export class HomeComponent implements OnInit {
   private articlesBeingEdited: {[key: string]: boolean} = {};
+  public isLoggedIn: Observable<boolean>;
 
-  constructor(private articlesService: ArticlesService) { }
+  constructor(private articlesService: ArticlesService, private authenticationService: AuthenticationService) {
+      this.isLoggedIn = authenticationService.isLoggedIn();
+   }
 
   ngOnInit() {
   }

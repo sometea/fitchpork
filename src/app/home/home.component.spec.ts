@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms/';
 import { ViewArticleComponent } from '../view-article/view-article.component';
 import { ImageComponent } from '../image/image.component';
 import { ImagesStorageService } from '../images-storage.service';
+import { AuthenticationService } from '../authentication.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -15,6 +16,10 @@ describe('HomeComponent', () => {
 
   const articlesServiceStub = {
     getArticles: jasmine.createSpy('getArticles').and.returnValue(Observable.of([]))
+  };
+
+  const authenticationServiceStub = {
+    isLoggedIn: jasmine.createSpy('isLoggedIn').and.returnValue(Observable.of(true))
   };
 
   const imagesStorageServiceStub = {};
@@ -33,6 +38,7 @@ describe('HomeComponent', () => {
       providers: [
         { provide: ArticlesService, useValue: articlesServiceStub },
         { provide: ImagesStorageService, useValue: imagesStorageServiceStub },
+        { provide: AuthenticationService, useValue: authenticationServiceStub },
       ]
     })
     .compileComponents();

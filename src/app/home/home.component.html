@@ -1,8 +1,10 @@
 <div id="details-container">
-    <p *ngFor="let article of articlesService.getArticles() | async">
-      <app-view-article *ngIf="!editingMode(article.$key)" [article]="article" (onRemove)="removeArticle(article.$key)" (onEdit)="editArticle(article.$key)"></app-view-article>
-      <app-edit-article *ngIf="editingMode(article.$key)" [article]="article" (onChange)="updateArticle(article.$key, $event)"></app-edit-article>
-    </p>
-    <app-image [fileKey]=""></app-image>
+    <ng-container *ngIf="isLoggedIn | async">
+      <p *ngFor="let article of articlesService.getArticles() | async">
+        <app-view-article *ngIf="!editingMode(article.$key)" [article]="article" (onRemove)="removeArticle(article.$key)" (onEdit)="editArticle(article.$key)"></app-view-article>
+        <app-edit-article *ngIf="editingMode(article.$key)" [article]="article" (onChange)="updateArticle(article.$key, $event)"></app-edit-article>
+      </p>
+      <app-image [fileKey]=""></app-image>
+    </ng-container>
 </div>
   
