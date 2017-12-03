@@ -12,9 +12,11 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit {
   private articlesBeingEdited: {[key: string]: boolean} = {};
   public isLoggedIn: Observable<boolean>;
+  private articles: Observable<Article[]>;
 
   constructor(private articlesService: ArticlesService, private authenticationService: AuthenticationService) {
       this.isLoggedIn = authenticationService.isLoggedIn();
+      this.articles = articlesService.getArticles();
    }
 
   ngOnInit() {

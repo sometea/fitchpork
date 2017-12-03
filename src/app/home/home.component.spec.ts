@@ -9,6 +9,7 @@ import { ViewArticleComponent } from '../view-article/view-article.component';
 import { ImageComponent } from '../image/image.component';
 import { ImagesStorageService } from '../images-storage.service';
 import { AuthenticationService } from '../authentication.service';
+import { ListArticlesComponent } from '../list-articles/list-articles.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -33,6 +34,7 @@ describe('HomeComponent', () => {
         HomeComponent,
         EditArticleComponent,
         ViewArticleComponent,
+        ListArticlesComponent,
         ImageComponent,
       ],
       providers: [
@@ -53,8 +55,4 @@ describe('HomeComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should get articles from the service', () => {
-    expect(articlesServiceStub.getArticles).toHaveBeenCalled();
-  })
 });

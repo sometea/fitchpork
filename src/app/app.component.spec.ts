@@ -14,6 +14,7 @@ import { EditArticleComponent } from "./edit-article/edit-article.component";
 import { ViewArticleComponent } from './view-article/view-article.component';
 import { ImageComponent } from './image/image.component';
 import { ImagesStorageService } from './images-storage.service';
+import { ListArticlesComponent } from './list-articles/list-articles.component';
 
 describe('AppComponent', () => {
   const authenticationServiceStub = {
@@ -42,6 +43,7 @@ describe('AppComponent', () => {
         HomeComponent,
         EditArticleComponent,
         ViewArticleComponent,
+        ListArticlesComponent,
         ImageComponent,
       ],
       providers: [
