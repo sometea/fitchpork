@@ -1,7 +1,8 @@
 <div *ngIf="article">
     <form #textForm="ngForm" (submit)="submit()">
+      <input type="text" [(ngModel)]="article.title" name="title"><br>
       <textarea [(ngModel)]="article.text" name="text" rows="10" cols="30">
-      </textarea>
+      </textarea><br>
       <button type="submit">Submit</button>
     </form>
 </div>

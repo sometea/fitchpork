@@ -1,6 +1,5 @@
 <h1>Fitchpork</h1>
 <ng-container *ngIf="loggedIn | async">
-  <a href="#" (click)="addArticle()">Add an article</a>
   <a href="#" (click)="logout()">Logout</a>
   <span id="userid">User ID: {{ (user | async)?.uid }}</span>
 </ng-container>

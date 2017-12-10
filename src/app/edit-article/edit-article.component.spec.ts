@@ -12,19 +12,21 @@ describe('EditArticleComponent', () => {
   let component: EditArticleComponent;
   let fixture: ComponentFixture<EditArticleComponent>;
 
+  const testArticle: Article = {
+    title: '', text: '', date: ''
+  };
+
   const articlesServiceStub = {
-    getArticle: jasmine.createSpy('getArticle'),
+    getArticle: jasmine.createSpy('getArticle').and.returnValue(Observable.of(testArticle)),
   };
 
   const paramMapStub = {
-    get: jasmine.createSpy('get'),
-  }
+    get: jasmine.createSpy('get').and.returnValue(''),
+  };
 
   const activatedRouteStub = {
-    route: {
-      paramMap: Observable.of(paramMapStub)
-    }
-  }
+      paramMap: Observable.of(paramMapStub),
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

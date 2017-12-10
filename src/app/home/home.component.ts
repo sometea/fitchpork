@@ -10,14 +10,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  private articlesBeingEdited: {[key: string]: boolean} = {};
   public isLoggedIn: Observable<boolean>;
   private articles: Observable<Article[]>;
 
   constructor(
     private articlesService: ArticlesService,
     private authenticationService: AuthenticationService,
-    
+
   ) {
       this.isLoggedIn = authenticationService.isLoggedIn();
       this.articles = articlesService.getArticles();
@@ -30,19 +29,12 @@ export class HomeComponent implements OnInit {
     this.articlesService.removeArticle(key);
   }
 
-  updateArticle(key: string, newArticle: Article) {
-    delete this.articlesBeingEdited[key];
-    this.articlesService.updateArticle(key, newArticle);
-  }
-
-  editArticle(key: string) {
-    if (this.articlesBeingEdited[key]) {
-      delete this.articlesBeingEdited[key];
-    }
-    this.articlesBeingEdited[key] = true;
-  }
-
-  editingMode(key: string): boolean {
-    return this.articlesBeingEdited[key];
+  addArticle() {
+    const article: Article = {
+      title: 'A new article',
+      text: 'This article has just been created',
+      date: 'Today',
+    };
+    this.articlesService.addArticle(article);
   }
 }

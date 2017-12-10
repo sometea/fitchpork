@@ -13,11 +13,10 @@ import { AuthenticationService } from './authentication.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
   user: Observable<firebase.User>;
   loggedIn: Observable<boolean>;
 
-  constructor(private auth: AuthenticationService, private articlesService: ArticlesService) {
+  constructor(private auth: AuthenticationService) {
     this.user = this.auth.getAuthState();
     this.loggedIn = this.auth.isLoggedIn();
   }
@@ -28,14 +27,5 @@ export class AppComponent {
 
   logout() {
     this.auth.logout();
-  }
-
-  addArticle() {
-    const newArticle: Article = {
-      title: 'A new article',
-      text: 'Just added!',
-      date: 'Today'
-    };
-    this.articlesService.addArticle(newArticle);
   }
 }

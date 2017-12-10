@@ -60,12 +60,6 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
-  }));
-
   it('should render the user id', fakeAsync(() => {
     authenticationServiceStub.getAuthState.and.returnValue(Observable.of({ uid: '1' }));
     const fixture = TestBed.createComponent(AppComponent);
