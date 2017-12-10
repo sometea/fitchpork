@@ -1,3 +1,5 @@
 <ul>
-  <li *ngFor="let article of articles | async"><strong>{{ article.title }}</strong> - {{ article.date }}</li>
+  <li *ngFor="let article of articles | async">
+    <a routerLink="/articles/{{article.$key}}"><strong>{{ article.title }}</strong> - {{ article.date }}</a>
+  </li>
 </ul>

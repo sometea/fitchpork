@@ -10,6 +10,7 @@ import { ImageComponent } from '../image/image.component';
 import { ImagesStorageService } from '../images-storage.service';
 import { AuthenticationService } from '../authentication.service';
 import { ListArticlesComponent } from '../list-articles/list-articles.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -29,6 +30,7 @@ describe('HomeComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
+        RouterTestingModule,
       ],
       declarations: [ 
         HomeComponent,

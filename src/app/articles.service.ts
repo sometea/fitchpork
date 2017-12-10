@@ -19,6 +19,10 @@ export class ArticlesService {
     return this.items;
   }
 
+  getArticle(key: string): Observable<Article> {
+    return this.af.object('/articles/' + key);
+  }
+
   addArticle(article: Article) {
     this.items.push(article);
   }

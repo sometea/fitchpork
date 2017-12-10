@@ -27,7 +27,7 @@ export const firebaseConfig = {
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'articles/:id', component: ViewArticleComponent },
+  { path: 'articles/:id', component: EditArticleComponent },
   { path: 'image', component: ImageComponent },
 ];
 

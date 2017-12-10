@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import * as firebase from 'firebase/app';
+import { ArticlesService } from '../articles.service';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-edit-article',
@@ -12,15 +14,26 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./edit-article.component.css']
 })
 export class EditArticleComponent implements OnInit {
-  @Input() article: Article;
-  @Output() onChange = new EventEmitter<Article>();
+  private article: Article;
+  private key: string;
 
-  constructor() { }
+  constructor(
+    private articlesService: ArticlesService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.route.paramMap.switchMap((params: ParamMap) => {
+      this.key = params.get('id');
+      return this.articlesService.getArticle(this.key);
+    }).subscribe(article => {
+      this.article = article;
+    });
   }
 
   public submit() {
-    this.onChange.emit(this.article);
+    this.articlesService.updateArticle(this.key, this.article);
+    this.router.navigate(['/']);
   }
 }

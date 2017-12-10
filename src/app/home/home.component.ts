@@ -14,7 +14,11 @@ export class HomeComponent implements OnInit {
   public isLoggedIn: Observable<boolean>;
   private articles: Observable<Article[]>;
 
-  constructor(private articlesService: ArticlesService, private authenticationService: AuthenticationService) {
+  constructor(
+    private articlesService: ArticlesService,
+    private authenticationService: AuthenticationService,
+    
+  ) {
       this.isLoggedIn = authenticationService.isLoggedIn();
       this.articles = articlesService.getArticles();
    }
