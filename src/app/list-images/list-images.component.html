@@ -1,6 +1,6 @@
 <h2>Images:</h2>
 <ul>
   <li *ngFor="let image of images | async">
-    <a routerLink="/images/{{image.$key}}"><strong>{{ image.$value }}</strong></a>
+    <a routerLink="/images/{{image.$key}}"><strong>{{ image.title }}</strong></a>
   </li>
 </ul>

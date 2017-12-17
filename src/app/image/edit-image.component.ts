@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ImagesStorageService } from '../images-storage.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { Image } from './image';
 
 @Component({
   selector: 'app-edit-image',
@@ -10,7 +11,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 export class EditImageComponent implements OnInit {
   public imageUrl: string;
   public imageAlt: string;
-  private fileKey: string;
+  private key: string;
 
   constructor(
     private imagesStorageService: ImagesStorageService,
@@ -22,8 +23,8 @@ export class EditImageComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.switchMap((params: ParamMap) => {
-      this.fileKey = params.get('id');
-      return this.imagesStorageService.getUrl(this.fileKey);
+      this.key = params.get('id');
+      return this.imagesStorageService.getUrl(this.key);
     }).subscribe(url => {
       this.imageUrl = url;
     });
@@ -31,11 +32,15 @@ export class EditImageComponent implements OnInit {
 
   handleFiles(fileList: FileList) {
     if (fileList.length > 0) {
+      const image: Image = {
+        title: 'TestTitle',
+        filename: '',
+      };
       this.imagesStorageService
-        .delete(this.fileKey)
-        .flatMap(() => this.imagesStorageService.upload(fileList.item(0)))
+        .delete(this.key)
+        .flatMap(() => this.imagesStorageService.upload(fileList.item(0), image))
         .flatMap(key => {
-          this.fileKey = key;
+          this.key = key;
           return this.imagesStorageService.getUrl(key);
         }).subscribe(url => {
           this.imageUrl = url;
