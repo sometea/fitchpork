@@ -3,6 +3,9 @@ import { ArticlesService } from '../articles.service';
 import { Article } from "../edit-article/article";
 import { AuthenticationService } from '../authentication.service';
 import { Observable } from 'rxjs';
+import { ImagesStorageService } from '../images-storage.service';
+import { Image } from '../image/image';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +18,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private articlesService: ArticlesService,
+    private imagesService: ImagesStorageService,
     private authenticationService: AuthenticationService,
-
+    private router: Router,
   ) {
       this.isLoggedIn = authenticationService.isLoggedIn();
       this.articles = articlesService.getArticles();
@@ -35,6 +39,14 @@ export class HomeComponent implements OnInit {
       text: 'This article has just been created',
       date: 'Today',
     };
-    this.articlesService.addArticle(article);
+    this.articlesService.addArticle(article).subscribe(key => this.router.navigate(['/articles/' + key]));
+  }
+
+  addImage() {
+    const image: Image = {
+      title: 'A test image',
+      filename: '',
+    };
+    this.imagesService.addImage(image).subscribe(key => this.router.navigate(['/images/' + key]));
   }
 }

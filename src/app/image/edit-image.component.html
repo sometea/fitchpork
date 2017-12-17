@@ -1,4 +1,7 @@
 <p>
+  Title: <input type="text" [(ngModel)]="title" name="title">
+</p>
+<p>
   Upload image: <input #fileInput type="file" (change)="handleFiles(fileInput.files)">
 </p>
 <p>

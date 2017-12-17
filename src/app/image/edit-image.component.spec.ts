@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { EditImageComponent } from './edit-image.component';
 import { ImagesStorageService } from '../images-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from "@angular/forms";
 
 describe('ImageComponent', () => {
   let component: EditImageComponent;
@@ -25,6 +26,7 @@ describe('ImageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ FormsModule ],      
       declarations: [ EditImageComponent ],
       providers: [
         { provide: ImagesStorageService, useValue: ImagesStorageServiceStub },

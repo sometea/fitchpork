@@ -23,8 +23,8 @@ export class ArticlesService {
     return this.af.object('/articles/' + key);
   }
 
-  addArticle(article: Article) {
-    this.items.push(article);
+  addArticle(article: Article): Observable<string> {
+    return Observable.fromPromise(this.items.push(article)).map(item => item.key);
   }
 
   removeArticle(key: string) {

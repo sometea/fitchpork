@@ -9,9 +9,10 @@ import { Image } from './image';
   styleUrls: ['./edit-image.component.css']
 })
 export class EditImageComponent implements OnInit {
-  public imageUrl: string;
-  public imageAlt: string;
+  private imageUrl: string;
+  private imageAlt: string;
   private key: string;
+  private title: string;
 
   constructor(
     private imagesStorageService: ImagesStorageService,
@@ -19,6 +20,7 @@ export class EditImageComponent implements OnInit {
     private router: Router
   ) { 
     this.imageAlt = 'No image loaded yet!';
+    this.title = '';
   }
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class EditImageComponent implements OnInit {
   handleFiles(fileList: FileList) {
     if (fileList.length > 0) {
       const image: Image = {
-        title: 'TestTitle',
+        title: this.title,
         filename: '',
       };
       this.imagesStorageService

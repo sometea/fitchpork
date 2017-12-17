@@ -20,7 +20,7 @@ export class ImagesStorageService {
    public upload(file: File, image: Image): Observable<string> {
      image.filename = file.name;
      return Observable.fromPromise(this.filesInDb.push(image))
-      .flatMap(item => Observable.fromPromise(this.storage.ref().child(image.filename).put(file)).map(snapshot => item.$key));
+      .flatMap(item => Observable.fromPromise(this.storage.ref().child(image.filename).put(file)).map(snapshot => item.key));
    }
 
    public update(key: string, file: File, image: Image): Observable<Image> {
@@ -40,7 +40,7 @@ export class ImagesStorageService {
           Observable.fromPromise(Promise.all([
             this.storage.ref().child(image.filename).delete(),
             this.firebaseDb.object('/images/' + key).remove()
-          ]))
+          ])).map(x => null)
       );
    }
 
@@ -51,5 +51,9 @@ export class ImagesStorageService {
 
    public get(key: string): Observable<Image> {
      return this.firebaseDb.object('images/' + key);
+   }
+
+   public addImage(image: Image): Observable<string> {
+     return Observable.fromPromise(this.filesInDb.push(image)).map(item => item.key);
    }
 }
