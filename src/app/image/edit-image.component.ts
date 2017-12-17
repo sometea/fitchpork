@@ -3,11 +3,11 @@ import { ImagesStorageService } from '../images-storage.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 @Component({
-  selector: 'app-image',
-  templateUrl: './image.component.html',
-  styleUrls: ['./image.component.css']
+  selector: 'app-edit-image',
+  templateUrl: './edit-image.component.html',
+  styleUrls: ['./edit-image.component.css']
 })
-export class ImageComponent implements OnInit {
+export class EditImageComponent implements OnInit {
   public imageUrl: string;
   public imageAlt: string;
   private fileKey: string;
@@ -42,5 +42,9 @@ export class ImageComponent implements OnInit {
           this.imageAlt = 'image';
         });
     }
+  }
+
+  cancel() {
+    this.router.navigate(['/']);
   }
 }

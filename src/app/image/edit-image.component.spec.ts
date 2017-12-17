@@ -1,13 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 
-import { ImageComponent } from './image.component';
+import { EditImageComponent } from './edit-image.component';
 import { ImagesStorageService } from '../images-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 describe('ImageComponent', () => {
-  let component: ImageComponent;
-  let fixture: ComponentFixture<ImageComponent>;
+  let component: EditImageComponent;
+  let fixture: ComponentFixture<EditImageComponent>;
 
   const ImagesStorageServiceStub = { 
     upload: jasmine.createSpy('upload').and.returnValue(Observable.of('testFileName')),
@@ -25,7 +25,7 @@ describe('ImageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageComponent ],
+      declarations: [ EditImageComponent ],
       providers: [
         { provide: ImagesStorageService, useValue: ImagesStorageServiceStub },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
@@ -36,7 +36,7 @@ describe('ImageComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImageComponent);
+    fixture = TestBed.createComponent(EditImageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -13,7 +13,7 @@ import { ArticlesService } from './articles.service';
 import { AuthenticationService } from './authentication.service';
 import { HomeComponent } from './home/home.component';
 import { ViewArticleComponent } from './view-article/view-article.component';
-import { ImageComponent } from './image/image.component';
+import { EditImageComponent } from './image/edit-image.component';
 import { ImagesStorageService } from './images-storage.service';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
 import { ListImagesComponent } from './list-images/list-images.component';
@@ -29,7 +29,7 @@ export const firebaseConfig = {
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'articles/:id', component: EditArticleComponent },
-  { path: 'images/:id', component: ImageComponent },
+  { path: 'images/:id', component: EditImageComponent },
 ];
 
 @NgModule({
@@ -38,7 +38,7 @@ const routes: Routes = [
     EditArticleComponent,
     HomeComponent,
     ViewArticleComponent,
-    ImageComponent,
+    EditImageComponent,
     ListArticlesComponent,
     ListImagesComponent,
   ],

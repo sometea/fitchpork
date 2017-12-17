@@ -6,7 +6,7 @@ import { EditArticleComponent } from '../edit-article/edit-article.component';
 import { ArticlesService } from '../articles.service';
 import { FormsModule } from '@angular/forms/';
 import { ViewArticleComponent } from '../view-article/view-article.component';
-import { ImageComponent } from '../image/image.component';
+import { EditImageComponent } from '../image/edit-image.component';
 import { ImagesStorageService } from '../images-storage.service';
 import { AuthenticationService } from '../authentication.service';
 import { ListArticlesComponent } from '../list-articles/list-articles.component';
