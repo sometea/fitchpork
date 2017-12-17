@@ -36,4 +36,8 @@ export class EditArticleComponent implements OnInit {
     this.articlesService.updateArticle(this.key, this.article);
     this.router.navigate(['/']);
   }
+
+  public cancel() {
+    this.router.navigate(['/']);
+  }
 }
