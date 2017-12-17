@@ -16,6 +16,7 @@ import { ViewArticleComponent } from './view-article/view-article.component';
 import { ImageComponent } from './image/image.component';
 import { ImagesStorageService } from './images-storage.service';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
+import { ListImagesComponent } from './list-images/list-images.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAb1sj2z72ouD3rxTJ7Vm-Dp6N8QY1LfHI',
@@ -39,6 +40,7 @@ const routes: Routes = [
     ViewArticleComponent,
     ImageComponent,
     ListArticlesComponent,
+    ListImagesComponent,
   ],
   imports: [
     BrowserModule,

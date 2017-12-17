@@ -11,6 +11,7 @@ import { ImagesStorageService } from '../images-storage.service';
 import { AuthenticationService } from '../authentication.service';
 import { ListArticlesComponent } from '../list-articles/list-articles.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ListImagesComponent } from '../list-images/list-images.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -37,7 +38,7 @@ describe('HomeComponent', () => {
         EditArticleComponent,
         ViewArticleComponent,
         ListArticlesComponent,
-        ImageComponent,
+        ListImagesComponent,
       ],
       providers: [
         { provide: ArticlesService, useValue: articlesServiceStub },
