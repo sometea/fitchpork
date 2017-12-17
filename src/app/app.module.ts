@@ -29,7 +29,7 @@ export const firebaseConfig = {
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'articles/:id', component: EditArticleComponent },
-  { path: 'image', component: ImageComponent },
+  { path: 'images/:id', component: ImageComponent },
 ];
 
 @NgModule({

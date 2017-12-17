@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ImageComponent } from './image.component';
 import { ImagesStorageService } from '../images-storage.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 describe('ImageComponent', () => {
   let component: ImageComponent;
@@ -14,11 +15,21 @@ describe('ImageComponent', () => {
     delete: jasmine.createSpy('delete').and.returnValue(Observable.of(null)),
   };
 
+  const paramMapStub = {
+    get: jasmine.createSpy('get').and.returnValue(''),
+  };
+
+  const activatedRouteStub = {
+      paramMap: Observable.of(paramMapStub),
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ImageComponent ],
       providers: [
         { provide: ImagesStorageService, useValue: ImagesStorageServiceStub },
+        { provide: ActivatedRoute, useValue: activatedRouteStub },
+        { provide: Router, useValue: {} },
       ]
     })
     .compileComponents();

@@ -25,7 +25,9 @@ describe('HomeComponent', () => {
     isLoggedIn: jasmine.createSpy('isLoggedIn').and.returnValue(Observable.of(true))
   };
 
-  const imagesStorageServiceStub = {};
+  const imagesStorageServiceStub = {
+    list: jasmine.createSpy('list').and.returnValue(Observable.of([])),
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

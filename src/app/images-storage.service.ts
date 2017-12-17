@@ -26,6 +26,10 @@ export class ImagesStorageService {
       .flatMap(filename => Observable.fromPromise(this.storage.ref().child(filename.$value).put(file)).map(snapshot => key));
    }
 
+   public list(): Observable<string[]> {
+     return this.filesInDb;
+   }
+
    public delete(key: string): Observable<void> {
      return this.firebaseDb.object('/images/' + key)
       .flatMap(filename =>

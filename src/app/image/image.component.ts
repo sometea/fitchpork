@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ImagesStorageService } from '../images-storage.service';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-image',
@@ -9,13 +10,23 @@ import { ImagesStorageService } from '../images-storage.service';
 export class ImageComponent implements OnInit {
   public imageUrl: string;
   public imageAlt: string;
-  @Input() fileKey: string;
+  private fileKey: string;
 
-  constructor(private imagesStorageService: ImagesStorageService) { 
+  constructor(
+    private imagesStorageService: ImagesStorageService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { 
     this.imageAlt = 'No image loaded yet!';
   }
 
   ngOnInit() {
+    this.route.paramMap.switchMap((params: ParamMap) => {
+      this.fileKey = params.get('id');
+      return this.imagesStorageService.getUrl(this.fileKey);
+    }).subscribe(url => {
+      this.imageUrl = url;
+    });
   }
 
   handleFiles(fileList: FileList) {
