@@ -26,29 +26,29 @@ export class EditImageComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.switchMap((params: ParamMap) => {
       this.key = params.get('id');
-      return this.imagesStorageService.getUrl(this.key);
-    }).subscribe(url => {
-      this.imageUrl = url;
+      return this.imagesStorageService.get(this.key);
+    }).subscribe(image => {
+      this.title = image.title;
+      this.imagesStorageService.getUrl(this.key).subscribe(url => {
+        this.imageUrl = url;
+      });
     });
   }
 
   handleFiles(fileList: FileList) {
-    if (fileList.length > 0) {
-      const image: Image = {
-        title: this.title,
-        filename: '',
-      };
-      this.imagesStorageService
-        .delete(this.key)
-        .flatMap(() => this.imagesStorageService.upload(fileList.item(0), image))
-        .flatMap(key => {
-          this.key = key;
-          return this.imagesStorageService.getUrl(key);
-        }).subscribe(url => {
-          this.imageUrl = url;
-          this.imageAlt = 'image';
-        });
+    if (fileList.length < 0) {
+      return;
     }
+    const image: Image = {
+      title: this.title,
+      filename: fileList.item(0).name,
+    };
+    this.imagesStorageService.update(this.key, image, fileList.item(0))
+      .flatMap(key => this.imagesStorageService.getUrl(key))
+      .subscribe(url => {
+        this.imageUrl = url;
+        this.imageAlt = 'image';
+      });
   }
 
   cancel() {

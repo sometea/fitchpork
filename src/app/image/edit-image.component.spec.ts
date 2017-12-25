@@ -5,15 +5,16 @@ import { EditImageComponent } from './edit-image.component';
 import { ImagesStorageService } from '../images-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from "@angular/forms";
+import { Image } from './image';
 
 describe('ImageComponent', () => {
   let component: EditImageComponent;
   let fixture: ComponentFixture<EditImageComponent>;
 
   const ImagesStorageServiceStub = { 
-    upload: jasmine.createSpy('upload').and.returnValue(Observable.of('testFileName')),
+    update: jasmine.createSpy('update').and.returnValue(Observable.of('testFileName')),
     getUrl: jasmine.createSpy('getUrl').and.returnValue(Observable.of('testUrl')),
-    delete: jasmine.createSpy('delete').and.returnValue(Observable.of(null)),
+    get: jasmine.createSpy('get').and.returnValue(Observable.of(new Image())),
   };
 
   const paramMapStub = {
@@ -53,6 +54,6 @@ describe('ImageComponent', () => {
       item: index => new File([], 'testFile'),
     };
     component.handleFiles(mockFileList);
-    expect(ImagesStorageServiceStub.upload).toHaveBeenCalled();
+    expect(ImagesStorageServiceStub.update).toHaveBeenCalled();
   });
 });

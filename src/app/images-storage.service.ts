@@ -13,27 +13,47 @@ export class ImagesStorageService {
   private filesInDb: FirebaseListObservable<any[]>;
 
   constructor(private firebaseApp: FirebaseApp, private firebaseDb: AngularFireDatabase) {
-      this.storage = firebaseApp.storage();
-      this.filesInDb = this.firebaseDb.list('/images');
-   }
+    this.storage = firebaseApp.storage();
+    this.filesInDb = this.firebaseDb.list('/images');
+  }
 
-   public upload(file: File, image: Image): Observable<string> {
-     image.filename = file.name;
-     return Observable.fromPromise(this.filesInDb.push(image))
-      .flatMap(item => Observable.fromPromise(this.storage.ref().child(image.filename).put(file)).map(snapshot => item.key));
-   }
+  public add(image: Image, file?: File): Observable<string> {
+    return Observable.fromPromise(this.filesInDb.push(image))
+      .flatMap(item => {
+        return file ?
+          Observable.fromPromise(this.storage.ref().child(image.filename).put(file)).map(snapshot => item.key) :
+          Observable.of(item.key);
+      });
+  }
 
-   public update(key: string, file: File, image: Image): Observable<Image> {
-     return this.firebaseDb.object('/images/' + key)
-      .flatMap(image => Observable.fromPromise(this.storage.ref().child(image.filename).put(file)).map(snapshot => image));
-   }
+  public update(key: string, image: Image, file?: File): Observable<string> {
+    return this.get(key).flatMap(oldImage => {
+      return Observable.fromPromise(this.filesInDb.update(key, image))
+        .flatMap(item => {
+          if (!file) {
+            return Observable.of(key);
+          }
+          if (!oldImage.filename) {
+            return Observable.fromPromise(this.storage.ref(image.filename).put(file)).map(snapshot => key);
+          }
+          return this.deleteAndUpload(oldImage.filename, image.filename, file).map(filename => key);
+        });
+    });
+  }
 
-   public list(): Observable<Image[]> {
-     return this.filesInDb;
-   }
+  private deleteAndUpload(oldFilename: string, newFilename: string, file: File): Observable<string> {
+    return Observable.fromPromise(Promise.all([
+      this.storage.ref(oldFilename).delete(),
+      this.storage.ref(newFilename).put(file)
+    ])).map(result => newFilename);
+  }
 
-   public delete(key: string): Observable<void> {
-     return this.firebaseDb.object('/images/' + key)
+  public list(): Observable<Image[]> {
+    return this.filesInDb;
+  }
+
+  public delete(key: string): Observable<void> {
+    return this.firebaseDb.object('/images/' + key)
       .flatMap(image =>
         image.filename === null ?
           Observable.of(null) :
@@ -42,18 +62,18 @@ export class ImagesStorageService {
             this.firebaseDb.object('/images/' + key).remove()
           ])).map(x => null)
       );
-   }
+  }
 
-   public getUrl(key: string): Observable<string> {
-     return this.firebaseDb.object('/images/' + key)
-     .flatMap(image => Observable.fromPromise(this.storage.ref().child(image.filename).getDownloadURL()));
-   }
+  public getUrl(key: string): Observable<string> {
+    return this.firebaseDb.object('/images/' + key)
+      .flatMap(image => {
+        return image.filename ?
+          Observable.fromPromise(this.storage.ref().child(image.filename).getDownloadURL()) :
+          Observable.of('');
+      });
+  }
 
-   public get(key: string): Observable<Image> {
-     return this.firebaseDb.object('images/' + key);
-   }
-
-   public addImage(image: Image): Observable<string> {
-     return Observable.fromPromise(this.filesInDb.push(image)).map(item => item.key);
-   }
+  public get(key: string): Observable<Image> {
+    return this.firebaseDb.object('images/' + key);
+  }
 }
