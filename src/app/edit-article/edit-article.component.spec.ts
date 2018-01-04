@@ -17,7 +17,7 @@ describe('EditArticleComponent', () => {
   };
 
   const articlesServiceStub = {
-    getArticle: jasmine.createSpy('getArticle').and.returnValue(Observable.of(testArticle)),
+    get: jasmine.createSpy('get').and.returnValue(Observable.of(testArticle)),
   };
 
   const paramMapStub = {

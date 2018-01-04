@@ -23,14 +23,14 @@ export class HomeComponent implements OnInit {
     private router: Router,
   ) {
       this.isLoggedIn = authenticationService.isLoggedIn();
-      this.articles = articlesService.getArticles();
+      this.articles = articlesService.list();
    }
 
   ngOnInit() {
   }
 
   removeArticle(key: string) {
-    this.articlesService.removeArticle(key);
+    this.articlesService.remove(key);
   }
 
   addArticle() {
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
       text: 'This article has just been created',
       date: 'Today',
     };
-    this.articlesService.addArticle(article).subscribe(key => this.router.navigate(['/articles/' + key]));
+    this.articlesService.add(article).subscribe(key => this.router.navigate(['/articles/' + key]));
   }
 
   addImage() {

@@ -36,12 +36,12 @@ export class ImagesStorageService {
           if (!oldImage.filename) {
             return Observable.fromPromise(this.storage.ref(image.filename).put(file)).map(snapshot => snapshot.downloadURL);
           }
-          return this.deleteAndUpload(oldImage.filename, image.filename, file);
+          return this.removeAndUpload(oldImage.filename, image.filename, file);
         });
     });
   }
 
-  private deleteAndUpload(oldFilename: string, newFilename: string, file: File): Observable<string> {
+  private removeAndUpload(oldFilename: string, newFilename: string, file: File): Observable<string> {
     return Observable.fromPromise(Promise.all([
       this.storage.ref(oldFilename).delete(),
       this.storage.ref(newFilename).put(file)
@@ -52,15 +52,15 @@ export class ImagesStorageService {
     return this.filesInDb;
   }
 
-  public delete(key: string): Observable<void> {
+  public remove(key: string): Observable<void> {
     return this.firebaseDb.object('/images/' + key)
       .first()
       .flatMap(image =>
-        image.filename === null ?
-          Observable.of(null) :
-          Observable.fromPromise(Promise.all([
-            this.storage.ref().child(image.filename).delete(),
-            this.firebaseDb.object('/images/' + key).remove()
+        !image.filename ?
+        Observable.fromPromise(this.firebaseDb.object('/images/' + key).remove()) :
+        Observable.fromPromise(Promise.all([
+          this.storage.ref().child(image.filename).delete(),
+          this.firebaseDb.object('/images/' + key).remove()
           ])).map(x => null)
       );
   }
@@ -76,6 +76,6 @@ export class ImagesStorageService {
   }
 
   public get(key: string): Observable<Image> {
-    return this.firebaseDb.object('images/' + key);
+    return this.firebaseDb.object('/images/' + key);
   }
 }

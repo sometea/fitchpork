@@ -20,6 +20,7 @@ export class EditImageComponent implements OnInit {
     private router: Router
   ) { 
     this.imageAlt = 'No image loaded yet!';
+    this.image = new Image();
   }
 
   ngOnInit() {
@@ -34,7 +35,7 @@ export class EditImageComponent implements OnInit {
     });
   }
 
-  handleFiles(fileList: FileList) {
+  public handleFiles(fileList: FileList) {
     if (fileList.length < 0) {
       return;
     }
@@ -46,8 +47,15 @@ export class EditImageComponent implements OnInit {
       });
   }
 
-  cancel() {
+  public cancel() {
     this.imagesStorageService.update(this.key, this.image)
+      .subscribe(() => {
+        this.router.navigate(['/']);
+      });
+  }
+
+  public delete() {
+    this.imagesStorageService.remove(this.key)
       .subscribe(() => {
         this.router.navigate(['/']);
       });

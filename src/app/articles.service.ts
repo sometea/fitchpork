@@ -15,23 +15,23 @@ export class ArticlesService {
     });
   }
 
-  getArticles(): Observable<Article[]> {
+  list(): Observable<Article[]> {
     return this.items;
   }
 
-  getArticle(key: string): Observable<Article> {
+  get(key: string): Observable<Article> {
     return this.af.object('/articles/' + key);
   }
 
-  addArticle(article: Article): Observable<string> {
+  add(article: Article): Observable<string> {
     return Observable.fromPromise(this.items.push(article)).map(item => item.key);
   }
 
-  removeArticle(key: string) {
+  remove(key: string) {
     this.items.remove(key);
   }
 
-  updateArticle(key: string, newArticle: Article) {
+  update(key: string, newArticle: Article) {
     this.items.update(key, newArticle);
   }
 }

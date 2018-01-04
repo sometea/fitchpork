@@ -26,18 +26,23 @@ export class EditArticleComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.switchMap((params: ParamMap) => {
       this.key = params.get('id');
-      return this.articlesService.getArticle(this.key);
+      return this.articlesService.get(this.key);
     }).subscribe(article => {
       this.article = article;
     });
   }
 
   public submit() {
-    this.articlesService.updateArticle(this.key, this.article);
+    this.articlesService.update(this.key, this.article);
     this.router.navigate(['/']);
   }
 
   public cancel() {
+    this.router.navigate(['/']);
+  }
+
+  public delete() {
+    this.articlesService.remove(this.key);
     this.router.navigate(['/']);
   }
 }

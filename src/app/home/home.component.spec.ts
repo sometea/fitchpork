@@ -18,7 +18,7 @@ describe('HomeComponent', () => {
   let fixture: ComponentFixture<HomeComponent>;
 
   const articlesServiceStub = {
-    getArticles: jasmine.createSpy('getArticles').and.returnValue(Observable.of([]))
+    list: jasmine.createSpy('list').and.returnValue(Observable.of([]))
   };
 
   const authenticationServiceStub = {

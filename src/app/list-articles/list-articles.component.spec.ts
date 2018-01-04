@@ -10,7 +10,7 @@ describe('ListArticlesComponent', () => {
   let fixture: ComponentFixture<ListArticlesComponent>;
 
   const articlesServiceStub = {
-    getArticles: jasmine.createSpy('getArticles').and.returnValue(Observable.of([]))
+    list: jasmine.createSpy('list').and.returnValue(Observable.of([]))
   };
 
   beforeEach(async(() => {
