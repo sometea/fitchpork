@@ -29,7 +29,7 @@ export class EditImageComponent implements OnInit {
       return this.imagesStorageService.get(this.key);
     }).subscribe(image => {
       this.title = image.title;
-      this.imagesStorageService.getUrl(this.key).subscribe(url => {
+      this.imagesStorageService.getUrl(this.key).first().subscribe(url => {
         this.imageUrl = url;
       });
     });
@@ -44,7 +44,6 @@ export class EditImageComponent implements OnInit {
       filename: fileList.item(0).name,
     };
     this.imagesStorageService.update(this.key, image, fileList.item(0))
-      .flatMap(key => this.imagesStorageService.getUrl(key))
       .subscribe(url => {
         this.imageUrl = url;
         this.imageAlt = 'image';
