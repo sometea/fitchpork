@@ -12,7 +12,7 @@ export class EditImageComponent implements OnInit {
   private imageUrl: string;
   private imageAlt: string;
   private key: string;
-  private title: string;
+  private image: Image;
 
   constructor(
     private imagesStorageService: ImagesStorageService,
@@ -20,7 +20,6 @@ export class EditImageComponent implements OnInit {
     private router: Router
   ) { 
     this.imageAlt = 'No image loaded yet!';
-    this.title = '';
   }
 
   ngOnInit() {
@@ -28,7 +27,7 @@ export class EditImageComponent implements OnInit {
       this.key = params.get('id');
       return this.imagesStorageService.get(this.key);
     }).subscribe(image => {
-      this.title = image.title;
+      this.image = image;
       this.imagesStorageService.getUrl(this.key).first().subscribe(url => {
         this.imageUrl = url;
       });
@@ -39,11 +38,8 @@ export class EditImageComponent implements OnInit {
     if (fileList.length < 0) {
       return;
     }
-    const image: Image = {
-      title: this.title,
-      filename: fileList.item(0).name,
-    };
-    this.imagesStorageService.update(this.key, image, fileList.item(0))
+    this.image.filename = fileList.item(0).name;
+    this.imagesStorageService.update(this.key, this.image, fileList.item(0))
       .subscribe(url => {
         this.imageUrl = url;
         this.imageAlt = 'image';
@@ -51,6 +47,9 @@ export class EditImageComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/']);
+    this.imagesStorageService.update(this.key, this.image)
+      .subscribe(() => {
+        this.router.navigate(['/']);
+      });
   }
 }
