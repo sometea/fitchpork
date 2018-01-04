@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ViewArticleComponent } from './view-article.component';
 import { ArticlesService } from '../articles.service';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import { AuthenticationService } from '../authentication.service';
 import { Article } from '../edit-article/article';
 

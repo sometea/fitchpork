@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { EditArticleComponent } from './edit-article.component';
-import { AuthenticationService } from "../authentication.service";
-import { Observable } from "rxjs/Observable";
+import { AuthenticationService } from '../authentication.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import { Article } from "./article";
 import { FormsModule } from "@angular/forms";
 import { ArticlesService } from '../articles.service';

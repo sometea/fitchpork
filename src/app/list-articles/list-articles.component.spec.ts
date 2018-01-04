@@ -4,6 +4,7 @@ import { ListArticlesComponent } from './list-articles.component';
 import { ArticlesService } from '../articles.service';
 import { Observable } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatListModule } from '@angular/material/list';
 
 describe('ListArticlesComponent', () => {
   let component: ListArticlesComponent;
@@ -15,7 +16,7 @@ describe('ListArticlesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule ],
+      imports: [ RouterTestingModule, MatListModule ],
       declarations: [ ListArticlesComponent ],
       providers: [
         { provide: ArticlesService, useValue: articlesServiceStub },

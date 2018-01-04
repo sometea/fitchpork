@@ -1,6 +1,6 @@
 <h2>Articles:</h2>
-<ul>
-  <li *ngFor="let article of articles | async">
-    <a routerLink="/articles/{{article.$key}}"><strong>{{ article.title }}</strong> - {{ article.date }}</a>
-  </li>
-</ul>
+<mat-nav-list>
+  <a mat-list-item routerLink="/articles/{{article.$key}}" *ngFor="let article of articles | async">
+    <strong>{{ article.title }}</strong> - {{ article.date }}
+  </a>
+</mat-nav-list>

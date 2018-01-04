@@ -16,6 +16,7 @@ import { EditImageComponent } from './image/edit-image.component';
 import { ImagesStorageService } from './images-storage.service';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
 import { ListImagesComponent } from './list-images/list-images.component';
+import { MatListModule } from '@angular/material/list';
 
 describe('AppComponent', () => {
   const authenticationServiceStub = {
@@ -37,6 +38,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
+        MatListModule,
         RouterTestingModule
       ],
       declarations: [

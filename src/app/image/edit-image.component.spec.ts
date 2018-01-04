@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import { EditImageComponent } from './edit-image.component';
 import { ImagesStorageService } from '../images-storage.service';
