@@ -9,7 +9,6 @@ import { Image } from './image';
   styleUrls: ['./edit-image.component.css']
 })
 export class EditImageComponent implements OnInit {
-  private imageUrl: string;
   private imageAlt: string;
   private key: string;
   private image: Image;
@@ -29,9 +28,6 @@ export class EditImageComponent implements OnInit {
       return this.imagesStorageService.get(this.key);
     }).subscribe(image => {
       this.image = image;
-      this.imagesStorageService.getUrl(this.key).first().subscribe(url => {
-        this.imageUrl = url;
-      });
     });
   }
 
@@ -42,7 +38,7 @@ export class EditImageComponent implements OnInit {
     this.image.filename = fileList.item(0).name;
     this.imagesStorageService.update(this.key, this.image, fileList.item(0))
       .subscribe(url => {
-        this.imageUrl = url;
+        this.image.url = url;
         this.imageAlt = 'image';
       });
   }

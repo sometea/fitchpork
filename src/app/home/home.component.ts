@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit {
     const image: Image = {
       title: 'A test image',
       filename: '',
+      url: '',
     };
     this.imagesService.add(image).subscribe(key => this.router.navigate(['/images/' + key]));
   }

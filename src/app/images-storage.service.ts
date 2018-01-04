@@ -65,17 +65,16 @@ export class ImagesStorageService {
       );
   }
 
-  public getUrl(key: string): Observable<string> {
-    return this.firebaseDb.object('/images/' + key)
-      .first()
-      .flatMap(image => {
-        return image.filename ?
-          Observable.fromPromise(this.storage.ref().child(image.filename).getDownloadURL()) :
-          Observable.of('');
-      });
-  }
-
   public get(key: string): Observable<Image> {
-    return this.firebaseDb.object('/images/' + key);
+    return this.firebaseDb.object('/images/' + key)
+      .flatMap((image: Image) => {
+        return !image.filename ?
+          Observable.of(image) :
+          Observable.fromPromise(this.storage.ref().child(image.filename).getDownloadURL())
+            .map(url => {
+              image.url = url;
+              return image;
+            })
+      });
   }
 }
