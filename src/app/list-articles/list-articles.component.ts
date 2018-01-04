@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./list-articles.component.css']
 })
 export class ListArticlesComponent implements OnInit {
-  private articles: Observable<Article[]>;
+  public articles: Observable<Article[]>;
 
   constructor(private articlesService: ArticlesService) { 
     this.articles = articlesService.list();

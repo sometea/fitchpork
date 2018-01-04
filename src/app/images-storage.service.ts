@@ -4,6 +4,9 @@ import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { Observable } from 'rxjs';
 import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/first';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Image } from './image/image';
 

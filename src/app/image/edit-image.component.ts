@@ -9,9 +9,9 @@ import { Image } from './image';
   styleUrls: ['./edit-image.component.css']
 })
 export class EditImageComponent implements OnInit {
-  private imageAlt: string;
   private key: string;
-  private image: Image;
+  public imageAlt: string;
+  public image: Image;
 
   constructor(
     private imagesStorageService: ImagesStorageService,
