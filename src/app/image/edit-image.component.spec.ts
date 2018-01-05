@@ -7,6 +7,7 @@ import { ImagesStorageService } from '../images-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from "@angular/forms";
 import { Image } from './image';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ImageComponent', () => {
   let component: EditImageComponent;
@@ -30,6 +31,7 @@ describe('ImageComponent', () => {
     TestBed.configureTestingModule({
       imports: [ FormsModule ],      
       declarations: [ EditImageComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
         { provide: ImagesStorageService, useValue: ImagesStorageServiceStub },
         { provide: ActivatedRoute, useValue: activatedRouteStub },

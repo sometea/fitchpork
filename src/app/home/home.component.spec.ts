@@ -12,7 +12,7 @@ import { AuthenticationService } from '../authentication.service';
 import { ListArticlesComponent } from '../list-articles/list-articles.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ListImagesComponent } from '../list-images/list-images.component';
-import { MatListModule } from '@angular/material/list';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -34,7 +34,6 @@ describe('HomeComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        MatListModule,
         RouterTestingModule,
       ],
       declarations: [ 
@@ -44,6 +43,7 @@ describe('HomeComponent', () => {
         ListArticlesComponent,
         ListImagesComponent,
       ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
         { provide: ArticlesService, useValue: articlesServiceStub },
         { provide: ImagesStorageService, useValue: imagesStorageServiceStub },

@@ -1,16 +1,17 @@
-<p>
-  Title: <input type="text" [(ngModel)]="image.title" name="title">
-</p>
-<p>
-  Current filename: {{ image.filename }}
-</p>
-<p>
-  Upload image: <input #fileInput type="file" (change)="handleFiles(fileInput.files)">
-</p>
-<p>
-  <img *ngIf="image.url" [src]="image.url" [alt]="imageAlt">
-</p>
-<p>
-  <button mat-raised-button (click)="cancel()">Back</button>
-  <button mat-raised-button (click)="delete()">Delete</button>
-</p>
+<div *ngIf="image">
+  <mat-form-field>
+    <input matInput placeholder="Title" [(ngModel)]="image.title" name="title">
+  </mat-form-field>
+  <p>
+    Current filename: {{ image.filename }}
+    <br> Upload image:
+    <input #fileInput type="file" (change)="handleFiles(fileInput.files)">
+  </p>
+  <p>
+    <img *ngIf="image.url" [src]="image.url" [alt]="imageAlt">
+  </p>
+  <p>
+    <button mat-raised-button (click)="cancel()">Back</button>
+    <button mat-raised-button (click)="delete()">Delete</button>
+  </p>
+</div>
