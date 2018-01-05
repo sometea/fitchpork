@@ -2,16 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 
 import { HomeComponent } from './home.component';
-import { EditArticleComponent } from '../edit-article/edit-article.component';
 import { ArticlesService } from '../articles.service';
 import { FormsModule } from '@angular/forms/';
-import { ViewArticleComponent } from '../view-article/view-article.component';
-import { EditImageComponent } from '../image/edit-image.component';
 import { ImagesStorageService } from '../images-storage.service';
 import { AuthenticationService } from '../authentication.service';
-import { ListArticlesComponent } from '../list-articles/list-articles.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ListImagesComponent } from '../list-images/list-images.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('HomeComponent', () => {
@@ -38,10 +33,6 @@ describe('HomeComponent', () => {
       ],
       declarations: [ 
         HomeComponent,
-        EditArticleComponent,
-        ViewArticleComponent,
-        ListArticlesComponent,
-        ListImagesComponent,
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
