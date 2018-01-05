@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AngularFireModule, FirebaseApp } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -53,6 +54,7 @@ const routes: Routes = [
     AngularFireAuthModule,
     BrowserAnimationsModule,
     MatListModule,
+    MatButtonModule,
   ],
   providers: [
     ArticlesService,

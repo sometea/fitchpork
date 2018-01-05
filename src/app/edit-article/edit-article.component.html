@@ -3,8 +3,8 @@
       <input type="text" [(ngModel)]="article.title" name="title"><br>
       <textarea [(ngModel)]="article.text" name="text" rows="10" cols="30">
       </textarea><br>
-      <button type="submit">Submit</button>
-      <button type="button" (click)="cancel()">Cancel</button>
-      <button type="button" (click)="delete()">Delete</button>
+      <button mat-raised-button type="submit">Submit</button>
+      <button mat-raised-button type="button" (click)="cancel()">Cancel</button>
+      <button mat-raised-button type="button" (click)="delete()">Delete</button>
     </form>
 </div>

@@ -1,9 +1,9 @@
 <h1>Fitchpork</h1>
 <ng-container *ngIf="loggedIn | async">
-  <a href="#" (click)="logout()">Logout</a>
+  <button mat-raised-button (click)="logout()">Logout</button>
   <span id="userid">User ID: {{ (user | async)?.uid }}</span>
 </ng-container>
 <ng-container *ngIf="!(loggedIn | async)">
-  <a href="#" (click)="login()">Anonymous Login</a>
+  <button mat-raised-button (click)="login()">Anonymous Login</button>
 </ng-container>
 <router-outlet></router-outlet>
