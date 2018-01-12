@@ -1,10 +1,16 @@
-<div *ngIf="article">
-    <form #textForm="ngForm" (submit)="submit()">
-      <input type="text" [(ngModel)]="article.title" name="title"><br>
-      <textarea [(ngModel)]="article.text" name="text" rows="10" cols="30">
-      </textarea><br>
-      <button type="submit">Submit</button>
-      <button type="button" (click)="cancel()">Cancel</button>
-      <button type="button" (click)="delete()">Delete</button>
-    </form>
-</div>
+<form *ngIf="article" #textForm="ngForm" (submit)="submit()">
+  <mat-form-field>
+    <input matInput placeholder="Title" [(ngModel)]="article.title" name="title">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Text" [(ngModel)]="article.text" name="text" rows="10" cols="30">
+    </textarea>
+  </mat-form-field>
+
+  <p>
+    <button mat-raised-button type="submit">Submit</button>
+    <button mat-raised-button type="button" (click)="cancel()">Cancel</button>
+    <button mat-raised-button type="button" (click)="delete()">Delete</button>
+  </p>
+</form>

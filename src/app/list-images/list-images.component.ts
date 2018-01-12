@@ -9,7 +9,7 @@ import { Image } from '../image/image';
   styleUrls: ['./list-images.component.css']
 })
 export class ListImagesComponent implements OnInit {
-  private images: Observable<Image[]>;
+  public images: Observable<Image[]>;
   
   constructor(private imagesService: ImagesStorageService) { }
 

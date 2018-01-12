@@ -9,13 +9,8 @@ import { FirebaseApp } from 'angularfire2';
 import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-import { HomeComponent } from './home/home.component';
-import { EditArticleComponent } from "./edit-article/edit-article.component";
-import { ViewArticleComponent } from './view-article/view-article.component';
-import { EditImageComponent } from './image/edit-image.component';
 import { ImagesStorageService } from './images-storage.service';
-import { ListArticlesComponent } from './list-articles/list-articles.component';
-import { ListImagesComponent } from './list-images/list-images.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
   const authenticationServiceStub = {
@@ -37,17 +32,12 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [
         AppComponent,
-        HomeComponent,
-        EditArticleComponent,
-        ViewArticleComponent,
-        ListArticlesComponent,
-        ListImagesComponent,
-        EditImageComponent,
       ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
         { provide: AuthenticationService, useValue: authenticationServiceStub },
         { provide: ArticlesService, useValue: articlesServiceStub },

@@ -4,6 +4,7 @@ import { ListArticlesComponent } from './list-articles.component';
 import { ArticlesService } from '../articles.service';
 import { Observable } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core/';
 
 describe('ListArticlesComponent', () => {
   let component: ListArticlesComponent;
@@ -17,6 +18,7 @@ describe('ListArticlesComponent', () => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule ],
       declarations: [ ListArticlesComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
         { provide: ArticlesService, useValue: articlesServiceStub },
       ]
