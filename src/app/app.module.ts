@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AngularFireModule, FirebaseApp } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -59,6 +60,7 @@ const routes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSidenavModule,
   ],
   providers: [
     ArticlesService,
