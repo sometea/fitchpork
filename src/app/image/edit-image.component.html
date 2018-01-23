@@ -6,6 +6,7 @@
     Current filename: {{ image.filename }}
     <br> Upload image:
     <input #fileInput type="file" (change)="handleFiles(fileInput.files)">
+    <span>Upload {{ uploadPercent }} % completed.</span>
   </p>
   <p>
     <img *ngIf="image.url" [src]="image.url" [alt]="imageAlt">

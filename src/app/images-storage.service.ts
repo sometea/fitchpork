@@ -2,13 +2,18 @@ import { Injectable, Inject } from '@angular/core';
 import { FirebaseApp } from 'angularfire2';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/first';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Image } from './image/image';
+
+export interface UploadProgress {
+  percentCompleted: Number,
+  downloadUrl: string,
+}
 
 @Injectable()
 export class ImagesStorageService {
@@ -29,26 +34,45 @@ export class ImagesStorageService {
       });
   }
 
-  public update(key: string, image: Image, file?: File): Observable<string> {
+  public update(key: string, image: Image, file?: File): Observable<UploadProgress> {
+    const noUpload: UploadProgress = {
+      percentCompleted: 100,
+      downloadUrl: '',
+    };
     return this.get(key).first().flatMap(oldImage => {
       return Observable.fromPromise(this.filesInDb.update(key, image))
         .flatMap(() => {
           if (!file) {
-            return Observable.of('');
-          }
-          if (!oldImage.filename) {
-            return Observable.fromPromise(this.storage.ref(image.filename).put(file)).map(snapshot => snapshot.downloadURL);
+            return Observable.of(noUpload);
           }
           return this.removeAndUpload(oldImage.filename, image.filename, file);
         });
     });
   }
 
-  private removeAndUpload(oldFilename: string, newFilename: string, file: File): Observable<string> {
-    return Observable.fromPromise(Promise.all([
-      this.storage.ref(oldFilename).delete(),
-      this.storage.ref(newFilename).put(file)
-    ])).map(result => result[1].downloadURL);
+  private removeAndUpload(oldFilename: string, newFilename: string, file: File): Observable<UploadProgress> {
+    if (oldFilename) {
+      this.storage.ref(oldFilename).delete();
+    }
+    const uploadTask = this.storage.ref(newFilename).put(file);
+    return Observable.create((observer: Observer<UploadProgress>) => {
+      uploadTask.on('state_changed', snapshot => {
+        const uploadProgress: UploadProgress = {
+          percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
+          downloadUrl: '',
+        };
+        observer.next(uploadProgress);
+      }, error => {
+        observer.error(error);
+      }, () => {
+        const uploadProgress: UploadProgress = {
+          percentCompleted: 100,
+          downloadUrl: uploadTask.snapshot.downloadURL,
+        }
+        observer.next(uploadProgress);
+        observer.complete();
+      });
+    });
   }
 
   public list(): Observable<Image[]> {

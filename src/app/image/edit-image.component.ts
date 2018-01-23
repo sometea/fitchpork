@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ImagesStorageService } from '../images-storage.service';
+import { ImagesStorageService, UploadProgress } from '../images-storage.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Image } from './image';
 
@@ -12,6 +12,7 @@ export class EditImageComponent implements OnInit {
   private key: string;
   public imageAlt: string;
   public image: Image;
+  public uploadPercent: Number;
 
   constructor(
     private imagesStorageService: ImagesStorageService,
@@ -20,6 +21,7 @@ export class EditImageComponent implements OnInit {
   ) { 
     this.imageAlt = 'No image loaded yet!';
     this.image = new Image();
+    this.uploadPercent = 0;
   }
 
   ngOnInit() {
@@ -37,9 +39,12 @@ export class EditImageComponent implements OnInit {
     }
     this.image.filename = fileList.item(0).name;
     this.imagesStorageService.update(this.key, this.image, fileList.item(0))
-      .subscribe(url => {
-        this.image.url = url;
-        this.imageAlt = 'image';
+      .subscribe((uploadProgress: UploadProgress) => {
+        if (uploadProgress.downloadUrl) {
+          this.image.url = uploadProgress.downloadUrl;
+          this.imageAlt = 'image';
+        }
+        this.uploadPercent = uploadProgress.percentCompleted;
       });
   }
 
