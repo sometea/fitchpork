@@ -1,14 +1,15 @@
 {
   "name": "fitchpork",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --target=production",
     "test": "ng test --source=false",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng test --single-run && ng build --target=production && firebase deploy"
   },
   "private": true,
   "dependencies": {
