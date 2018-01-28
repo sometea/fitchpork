@@ -6,7 +6,10 @@
       <span id="userid">User ID: {{ (user | async)?.uid }}</span>
     </ng-container>
     <ng-container *ngIf="!(loggedIn | async)">
-      <button mat-raised-button (click)="login()">Anonymous Login</button>
+      <input matInput placeholder="Email" [(ngModel)]="userToLogIn.email">
+      <input matInput placeholder="Password" [(ngModel)]="userToLogIn.password">
+      <button mat-raised-button (click)="login()">Login</button>
+      <div *ngIf="errorMessage">{{ errorMessage }}</div>
     </ng-container>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
