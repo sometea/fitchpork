@@ -6,11 +6,18 @@
       <span id="userid">User: {{ (user | async)?.email }}</span>
     </ng-container>
     <ng-container *ngIf="!(loggedIn | async)">
-      <input matInput placeholder="Email" [(ngModel)]="userToLogIn.email">
-      <input matInput placeholder="Password" [(ngModel)]="userToLogIn.password">
-      <button mat-raised-button (click)="login()">Login</button>
-      <div *ngIf="errorMessage">{{ errorMessage }}</div>
+      <mat-form-field>
+        <input type="email" matInput placeholder="Email" [(ngModel)]="userToLogIn.email">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="password" matInput placeholder="Password" [(ngModel)]="userToLogIn.password">
+      </mat-form-field>
+      <div>
+        <button mat-raised-button (click)="login()">Login</button>
+        <div *ngIf="errorMessage">{{ errorMessage }}</div>
+      </div>
     </ng-container>
     <router-outlet></router-outlet>
+    <br>
   </mat-sidenav-content>
 </mat-sidenav-container>
