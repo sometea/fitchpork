@@ -53,13 +53,13 @@ describe('AppComponent', () => {
   }));
 
   it('should render the user id', fakeAsync(() => {
-    authenticationServiceStub.getAuthState.and.returnValue(Observable.of({ uid: '1' }));
+    authenticationServiceStub.getAuthState.and.returnValue(Observable.of({ email: 'test@test.de' }));
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(authenticationServiceStub.getAuthState).toHaveBeenCalled();
-    expect(compiled.querySelector('#userid').textContent).toContain('User ID: 1');
+    expect(compiled.querySelector('#userid').textContent).toContain('User: test@test.de');
   }));
 });

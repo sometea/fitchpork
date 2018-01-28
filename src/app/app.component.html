@@ -3,7 +3,7 @@
     <h1>Fitchpork</h1>
     <ng-container *ngIf="loggedIn | async">
       <button mat-raised-button (click)="logout()">Logout</button>
-      <span id="userid">User ID: {{ (user | async)?.uid }}</span>
+      <span id="userid">User: {{ (user | async)?.email }}</span>
     </ng-container>
     <ng-container *ngIf="!(loggedIn | async)">
       <input matInput placeholder="Email" [(ngModel)]="userToLogIn.email">
