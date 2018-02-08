@@ -1,18 +1,20 @@
 <div *ngIf="image">
-  <mat-form-field>
-    <input matInput placeholder="Title" [(ngModel)]="image.title" name="title">
-  </mat-form-field>
+  <p>
+    <mat-form-field>
+      <input matInput placeholder="Title" [(ngModel)]="image.title" name="title">
+    </mat-form-field>
+  </p>
   <p>
     Current filename: {{ image.filename }}
     <br> Upload image:
-    <input #fileInput type="file" (change)="handleFiles(fileInput.files)">
-    <span>Upload {{ uploadPercent }} % completed.</span>
+    <input #fileInput mat-raised-button type="file" (change)="handleFiles(fileInput.files)"><br>
+    <span *ngIf="uploadPercent">Upload {{ uploadPercent }} % completed.</span>
   </p>
   <p>
     <img *ngIf="image.url" [src]="image.url" [alt]="imageAlt">
   </p>
   <p>
-    <button mat-raised-button (click)="cancel()">Back</button>
-    <button mat-raised-button (click)="delete()">Delete</button>
+    <button mat-raised-button color="accent" (click)="cancel()">Back</button>
+    <button mat-raised-button color="accent" (click)="delete()">Delete</button>
   </p>
 </div>
