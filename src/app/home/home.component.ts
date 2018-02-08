@@ -13,18 +13,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public isLoggedIn: Observable<boolean>;
-  private articles: Observable<Article[]>;
-
+  
   constructor(
     private articlesService: ArticlesService,
     private imagesService: ImagesStorageService,
     private authenticationService: AuthenticationService,
     private router: Router,
-  ) {
-      this.isLoggedIn = authenticationService.isLoggedIn();
-      this.articles = articlesService.list();
-   }
+  ) { }
 
   ngOnInit() {
   }

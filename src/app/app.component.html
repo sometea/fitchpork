@@ -2,8 +2,8 @@
   <span>Fitchpork</span>
   <span class="fill-space"></span>
   <ng-container *ngIf="loggedIn | async">
-      <span id="userid">User: {{ (user | async)?.email }}</span>
-      <button mat-raised-button color="accent" (click)="logout()">Logout</button>
+    <span id="userid">User: {{ (user | async)?.email }}</span>
+    <button mat-raised-button color="accent" (click)="logout()">Logout</button>
   </ng-container>
 </mat-toolbar>
 <mat-sidenav-container>
@@ -20,7 +20,9 @@
         <div *ngIf="errorMessage">{{ errorMessage }}</div>
       </div>
     </ng-container>
-    <router-outlet></router-outlet>
+    <ng-container *ngIf="(loggedIn | async)">
+      <router-outlet></router-outlet>
+    </ng-container>
     <br>
   </mat-sidenav-content>
 </mat-sidenav-container>
