@@ -1,5 +1,7 @@
-<mat-card>
-  <mat-card-title>Articles</mat-card-title>
+<mat-card class="list-articles-card">
+  <mat-card-header>
+    <mat-card-title>Articles</mat-card-title>
+  </mat-card-header>
   <mat-card-content>
     <mat-nav-list>
       <a mat-list-item routerLink="/articles/{{article.$key}}" *ngFor="let article of articles | async">
@@ -8,6 +10,6 @@
     </mat-nav-list>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="accent" type="button">Add Article</button>
+    <button mat-raised-button color="accent" type="button" (click)="addArticle()">Add Article</button>
   </mat-card-actions>
 </mat-card>

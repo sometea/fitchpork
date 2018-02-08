@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImagesStorageService } from '../images-storage.service';
 import { Image } from '../image/image';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-images',
@@ -11,10 +12,21 @@ import { Image } from '../image/image';
 export class ListImagesComponent implements OnInit {
   public images: Observable<Image[]>;
   
-  constructor(private imagesService: ImagesStorageService) { }
+  constructor(
+    private imagesService: ImagesStorageService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.images = this.imagesService.list();
   }
 
+  addImage() {
+    const image: Image = {
+      title: 'A test image',
+      filename: '',
+      url: '',
+    };
+    this.imagesService.add(image).subscribe(key => this.router.navigate(['/images/' + key]));
+  }
 }

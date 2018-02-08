@@ -24,10 +24,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  removeArticle(key: string) {
-    this.articlesService.remove(key);
-  }
-
   addArticle() {
     const article: Article = {
       title: 'A new article',
