@@ -6,11 +6,14 @@
   </p>
 
   <p>
-    <mat-form-field>
-      <textarea matInput placeholder="Text" [(ngModel)]="article.text" name="text" rows="10" cols="30">
+    <mat-form-field class="textinput">
+      <textarea matInput placeholder="Text" [(ngModel)]="article.text" name="text">
       </textarea>
     </mat-form-field>
+    
+    <markdown class="textinput" [data]="article.text"></markdown>
   </p>
+  <br clear="both">
 
   <p>
     <button mat-raised-button color="accent" type="submit">Submit</button>

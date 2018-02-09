@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { FirebaseApp } from 'angularfire2';
+import 'firebase/storage';
 import { Observable, Observer } from 'rxjs';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/map';

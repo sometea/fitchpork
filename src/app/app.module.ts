@@ -15,6 +15,8 @@ import { AngularFireModule, FirebaseApp } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import { MarkdownModule } from 'ngx-md';
+
 import { AppComponent } from './app.component';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ArticlesService } from './articles.service';
@@ -53,6 +55,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    MarkdownModule.forRoot(),
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
