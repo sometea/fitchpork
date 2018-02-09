@@ -4,8 +4,8 @@
   </mat-card-header>
   <mat-card-content>
     <mat-nav-list>
-      <a mat-list-item routerLink="/images/{{image.$key}}" *ngFor="let image of images | async">
-        <strong>{{ image.title }}</strong>
+      <a mat-list-item routerLink="/images/{{image.key}}" *ngFor="let image of images | async">
+        <strong>{{ image.image.title }}</strong>
       </a>
     </mat-nav-list>
   </mat-card-content>

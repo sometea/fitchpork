@@ -3,3 +3,8 @@ export class Image {
     filename: string;
     url: string;
 }
+
+export class ImageWithKey {
+    key: string;
+    image: Image;
+}

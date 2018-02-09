@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImagesStorageService } from '../images-storage.service';
-import { Image } from '../image/image';
+import { Image, ImageWithKey } from '../image/image';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-images.component.css']
 })
 export class ListImagesComponent implements OnInit {
-  public images: Observable<Image[]>;
+  public images: Observable<ImageWithKey[]>;
   
   constructor(
     private imagesService: ImagesStorageService,

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { FirebaseListObservable } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import { ArticlesService } from './articles.service';

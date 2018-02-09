@@ -1,14 +1,15 @@
 import { Injectable, Inject } from '@angular/core';
 import { FirebaseApp } from 'angularfire2';
-import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { Observable, Observer } from 'rxjs';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/first';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { Image } from './image/image';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Image, ImageWithKey } from './image/image';
+import { AngularFireList } from 'angularfire2/database/interfaces';
+import { FirebaseStorage } from '@firebase/storage-types';
 
 export interface UploadProgress {
   percentCompleted: Number,
@@ -17,8 +18,8 @@ export interface UploadProgress {
 
 @Injectable()
 export class ImagesStorageService {
-  private storage: firebase.storage.Storage;
-  private filesInDb: FirebaseListObservable<any[]>;
+  private storage: FirebaseStorage;
+  private filesInDb: AngularFireList<Image>;
 
   constructor(private firebaseApp: FirebaseApp, private firebaseDb: AngularFireDatabase) {
     this.storage = firebaseApp.storage();
@@ -56,7 +57,7 @@ export class ImagesStorageService {
     }
     const uploadTask = this.storage.ref(newFilename).put(file);
     return Observable.create((observer: Observer<UploadProgress>) => {
-      uploadTask.on('state_changed', snapshot => {
+      uploadTask.on('state_changed', (snapshot: any) => {
         const uploadProgress: UploadProgress = {
           percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
           downloadUrl: '',
@@ -75,12 +76,18 @@ export class ImagesStorageService {
     });
   }
 
-  public list(): Observable<Image[]> {
-    return this.filesInDb;
+  public list(): Observable<ImageWithKey[]> {
+    return this.filesInDb.snapshotChanges().map(actions => actions.map(action => {
+      let imageWithKey: ImageWithKey = {
+        key: action.key,
+        image: action.payload.val()
+      };
+      return imageWithKey;
+     }));
   }
 
   public remove(key: string): Observable<void> {
-    return this.firebaseDb.object('/images/' + key)
+    return this.firebaseDb.object<Image>('/images/' + key).valueChanges()
       .first()
       .flatMap(image =>
         !image.filename ?
@@ -93,7 +100,7 @@ export class ImagesStorageService {
   }
 
   public get(key: string): Observable<Image> {
-    return this.firebaseDb.object('/images/' + key)
+    return this.firebaseDb.object<Image>('/images/' + key).valueChanges()
       .flatMap((image: Image) => {
         return !image.filename ?
           Observable.of(image) :

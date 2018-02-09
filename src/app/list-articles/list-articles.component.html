@@ -4,8 +4,8 @@
   </mat-card-header>
   <mat-card-content>
     <mat-nav-list>
-      <a mat-list-item routerLink="/articles/{{article.$key}}" *ngFor="let article of articles | async">
-        <strong>{{ article.title }}</strong>&nbsp;- {{ article.date }}
+      <a mat-list-item routerLink="/articles/{{article.key}}" *ngFor="let article of articles | async">
+        <strong>{{ article.article.title }}</strong>&nbsp;- {{ article.article.date }}
       </a>
     </mat-nav-list>
   </mat-card-content>

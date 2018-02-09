@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '../articles.service';
-import { Article } from '../edit-article/article';
+import { ArticleWithKey, Article } from '../edit-article/article';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-articles.component.css']
 })
 export class ListArticlesComponent implements OnInit {
-  public articles: Observable<Article[]>;
+  public articles: Observable<ArticleWithKey[]>;
 
   constructor(
     private articlesService: ArticlesService,
