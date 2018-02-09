@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { ImagesStorageService } from '../images-storage.service';
 import { Image, ImageWithKey } from '../image/image';
 import { Router } from '@angular/router';

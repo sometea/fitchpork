@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 import { ArticlesService } from './articles.service';
 import { AngularFireDatabase } from 'angularfire2/database';

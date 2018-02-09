@@ -7,7 +7,7 @@ import { ArticlesService } from './articles.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseApp } from 'angularfire2';
 import { AngularFireDatabase } from "angularfire2/database";
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from './authentication.service';
 import { ImagesStorageService } from './images-storage.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';

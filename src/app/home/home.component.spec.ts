@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 import { HomeComponent } from './home.component';
 import { ArticlesService } from '../articles.service';

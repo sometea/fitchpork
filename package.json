@@ -5,11 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --target=production",
+    "build": "ng build --prod",
     "test": "ng test --source=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng test --single-run && ng build --target=production && firebase deploy"
+    "deploy": "ng test --single-run && ng build --prod && firebase deploy"
   },
   "private": true,
   "dependencies": {

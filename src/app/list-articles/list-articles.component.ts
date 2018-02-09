@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '../articles.service';
 import { ArticleWithKey, Article } from '../edit-article/article';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
 @Component({

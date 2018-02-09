@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '../articles.service';
 import { Article } from "../edit-article/article";
 import { AuthenticationService } from '../authentication.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { ImagesStorageService } from '../images-storage.service';
 import { Image } from '../image/image';
 import { Router } from '@angular/router';

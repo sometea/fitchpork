@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ListImagesComponent } from './list-images.component';
 import { ImagesStorageService } from '../images-storage.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ListImagesComponent', () => {
