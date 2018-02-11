@@ -2,6 +2,11 @@
     flex: 1 1 auto;
 }
 
+.home-link {
+    text-decoration: none;
+    color: white;
+}
+
 #userid {
     font-size: small;
 }

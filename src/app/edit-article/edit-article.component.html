@@ -7,7 +7,8 @@
 
   <p>
     <mat-form-field class="textinput">
-      <textarea matInput placeholder="Text" [(ngModel)]="article.text" name="text">
+      <textarea matInput placeholder="Text" [(ngModel)]="article.text" name="text" matTextareaAutosize matAutosizeMinRows="5"
+        matAutosizeMaxRows="10">
       </textarea>
     </mat-form-field>
     

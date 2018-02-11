@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <span>Fitchpork</span>
+  <a class="home-link" routerLink="/">Fitchpork</a>
   <span class="fill-space"></span>
   <ng-container *ngIf="loggedIn | async">
     <span id="userid">User: {{ (user | async)?.email }}</span>
