@@ -40,6 +40,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'articles/:id', component: EditArticleComponent },
   { path: 'images/:id', component: EditImageComponent },
+  { path: 'images', component: ListImagesComponent },
+  { path: 'articles', component: ListArticlesComponent },
 ];
 
 @NgModule({
