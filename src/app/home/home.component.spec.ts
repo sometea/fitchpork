@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { HomeComponent } from './home.component';
 import { ArticlesService } from '../articles.service';
 import { FormsModule } from '@angular/forms/';
-import { ImagesStorageService } from '../images-storage.service';
+import { FilesStorageService } from '../files-storage.service';
 import { AuthenticationService } from '../authentication.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -37,7 +37,7 @@ describe('HomeComponent', () => {
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
         { provide: ArticlesService, useValue: articlesServiceStub },
-        { provide: ImagesStorageService, useValue: imagesStorageServiceStub },
+        { provide: FilesStorageService, useValue: imagesStorageServiceStub },
         { provide: AuthenticationService, useValue: authenticationServiceStub },
       ]
     })

@@ -3,10 +3,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import { EditImageComponent } from './edit-image.component';
-import { ImagesStorageService } from '../images-storage.service';
+import { FilesStorageService } from '../files-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from "@angular/forms";
-import { Image } from './image';
+import { FileUpload } from './image';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ImageComponent', () => {
@@ -16,7 +16,7 @@ describe('ImageComponent', () => {
   const ImagesStorageServiceStub = { 
     update: jasmine.createSpy('update').and.returnValue(Observable.of('testFileName')),
     getUrl: jasmine.createSpy('getUrl').and.returnValue(Observable.of('testUrl')),
-    get: jasmine.createSpy('get').and.returnValue(Observable.of(new Image())),
+    get: jasmine.createSpy('get').and.returnValue(Observable.of(new FileUpload())),
   };
 
   const paramMapStub = {
@@ -33,7 +33,7 @@ describe('ImageComponent', () => {
       declarations: [ EditImageComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
-        { provide: ImagesStorageService, useValue: ImagesStorageServiceStub },
+        { provide: FilesStorageService, useValue: ImagesStorageServiceStub },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: Router, useValue: {} },
       ]

@@ -9,7 +9,7 @@ import { FirebaseApp } from 'angularfire2';
 import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from './authentication.service';
-import { ImagesStorageService } from './images-storage.service';
+import { FilesStorageService } from './files-storage.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
@@ -41,7 +41,7 @@ describe('AppComponent', () => {
       providers: [
         { provide: AuthenticationService, useValue: authenticationServiceStub },
         { provide: ArticlesService, useValue: articlesServiceStub },
-        { provide: ImagesStorageService, useValue: imagesStorageServiceStub },
+        { provide: FilesStorageService, useValue: imagesStorageServiceStub },
       ]
     }).compileComponents();
   }));

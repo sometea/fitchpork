@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ListImagesComponent } from './list-images.component';
-import { ImagesStorageService } from '../images-storage.service';
+import { FilesStorageService } from '../files-storage.service';
 import { Observable } from 'rxjs/Observable';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -20,7 +20,7 @@ describe('ListImagesComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [ ListImagesComponent ],
       providers: [
-        { provide: ImagesStorageService, useValue: imagesStorageServiceStub },
+        { provide: FilesStorageService, useValue: imagesStorageServiceStub },
       ],
     })
     .compileComponents();

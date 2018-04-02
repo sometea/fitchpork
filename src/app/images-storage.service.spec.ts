@@ -1,10 +1,10 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ImagesStorageService } from './images-storage.service';
+import { FilesStorageService } from './files-storage.service';
 import { FirebaseApp } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
 
-describe('ImagesStorageService', () => {
+describe('FilesStorageService', () => {
   const FirebaseAppStub = { 
     storage: jasmine.createSpy('storage'),
   };
@@ -17,14 +17,14 @@ describe('ImagesStorageService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        ImagesStorageService,
+        FilesStorageService,
         { provide: FirebaseApp, useValue: FirebaseAppStub },
         { provide: AngularFireDatabase, useValue: FirebaseDbStub },
       ],
     });
   });
 
-  it('should be created', inject([ImagesStorageService], (service: ImagesStorageService) => {
+  it('should be created', inject([FilesStorageService], (service: FilesStorageService) => {
     expect(service).toBeTruthy();
   }));
 });

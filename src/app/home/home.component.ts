@@ -3,8 +3,8 @@ import { ArticlesService } from '../articles.service';
 import { Article } from "../edit-article/article";
 import { AuthenticationService } from '../authentication.service';
 import { Observable } from 'rxjs/Observable';
-import { ImagesStorageService } from '../images-storage.service';
-import { Image } from '../image/image';
+import { FilesStorageService } from '../files-storage.service';
+import { FileUpload } from '../image/image';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   
   constructor(
     private articlesService: ArticlesService,
-    private imagesService: ImagesStorageService,
+    private imagesService: FilesStorageService,
     private authenticationService: AuthenticationService,
     private router: Router,
   ) { }
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   }
 
   addImage() {
-    const image: Image = {
+    const image: FileUpload = {
       title: 'A test image',
       filename: '',
       url: '',

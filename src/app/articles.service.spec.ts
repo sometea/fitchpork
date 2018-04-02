@@ -8,12 +8,7 @@ import { Article } from './edit-article/article';
 describe('ArticlesService', () => {
   beforeEach(() => {
     const angularFireDatabaseStub = {
-      list() {
-        return {
-          value: 'test',
-          push () { }
-        };
-      }
+      list: jasmine.createSpy('list'),
     };
 
     TestBed.configureTestingModule({

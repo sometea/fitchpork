@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ImagesStorageService } from '../images-storage.service';
-import { Image, ImageWithKey } from '../image/image';
+import { FilesStorageService } from '../files-storage.service';
+import { FileUpload, FileUploadWithKey } from '../image/image';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,10 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-images.component.css']
 })
 export class ListImagesComponent implements OnInit {
-  public images: Observable<ImageWithKey[]>;
+  public images: Observable<FileUploadWithKey[]>;
   
   constructor(
-    private imagesService: ImagesStorageService,
+    private imagesService: FilesStorageService,
     private router: Router
   ) { }
 
@@ -22,7 +22,7 @@ export class ListImagesComponent implements OnInit {
   }
 
   addImage() {
-    const image: Image = {
+    const image: FileUpload = {
       title: 'A test image',
       filename: '',
       url: '',

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ImagesStorageService, UploadProgress } from '../images-storage.service';
+import { FilesStorageService } from '../files-storage.service';
+import { UploadProgress } from '../upload-progress';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { Image } from './image';
+import { FileUpload } from './image';
 
 @Component({
   selector: 'app-edit-image',
@@ -11,16 +12,16 @@ import { Image } from './image';
 export class EditImageComponent implements OnInit {
   private key: string;
   public imageAlt: string;
-  public image: Image;
+  public image: FileUpload;
   public uploadPercent: Number;
 
   constructor(
-    private imagesStorageService: ImagesStorageService,
+    private imagesStorageService: FilesStorageService,
     private route: ActivatedRoute,
     private router: Router
   ) { 
     this.imageAlt = 'No image loaded yet!';
-    this.image = new Image();
+    this.image = new FileUpload();
     this.uploadPercent = 0;
   }
 

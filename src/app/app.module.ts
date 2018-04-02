@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { AngularFireModule, FirebaseApp } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 import { MarkdownModule } from 'ngx-md';
 
@@ -24,7 +25,7 @@ import { AuthenticationService } from './authentication.service';
 import { HomeComponent } from './home/home.component';
 import { ViewArticleComponent } from './view-article/view-article.component';
 import { EditImageComponent } from './image/edit-image.component';
-import { ImagesStorageService } from './images-storage.service';
+import { FilesStorageService } from './files-storage.service';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
 import { ListImagesComponent } from './list-images/list-images.component';
 
@@ -62,6 +63,7 @@ const routes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     MatListModule,
     MatButtonModule,
@@ -74,7 +76,7 @@ const routes: Routes = [
   providers: [
     ArticlesService,
     AuthenticationService,
-    ImagesStorageService,
+    FilesStorageService,
   ],
   bootstrap: [AppComponent]
 })
