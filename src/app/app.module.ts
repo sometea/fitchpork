@@ -24,10 +24,10 @@ import { ArticlesService } from './articles.service';
 import { AuthenticationService } from './authentication.service';
 import { HomeComponent } from './home/home.component';
 import { ViewArticleComponent } from './view-article/view-article.component';
-import { EditImageComponent } from './image/edit-image.component';
+import { EditFileComponent } from './edit-file/edit-file.component';
 import { FilesStorageService } from './files-storage.service';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
-import { ListImagesComponent } from './list-images/list-images.component';
+import { ListFilesComponent } from './list-files/list-files.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAb1sj2z72ouD3rxTJ7Vm-Dp6N8QY1LfHI',
@@ -40,8 +40,8 @@ export const firebaseConfig = {
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'articles/:id', component: EditArticleComponent },
-  { path: 'images/:id', component: EditImageComponent },
-  { path: 'images', component: ListImagesComponent },
+  { path: 'files/:id', component: EditFileComponent },
+  { path: 'files', component: ListFilesComponent },
   { path: 'articles', component: ListArticlesComponent },
 ];
 
@@ -51,9 +51,9 @@ const routes: Routes = [
     EditArticleComponent,
     HomeComponent,
     ViewArticleComponent,
-    EditImageComponent,
+    EditFileComponent,
     ListArticlesComponent,
-    ListImagesComponent,
+    ListFilesComponent,
   ],
   imports: [
     BrowserModule,

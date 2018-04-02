@@ -2,14 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FilesStorageService } from '../files-storage.service';
 import { UploadProgress } from '../upload-progress';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { FileUpload } from './image';
+import { FileUpload } from './fileupload';
 
 @Component({
   selector: 'app-edit-image',
-  templateUrl: './edit-image.component.html',
-  styleUrls: ['./edit-image.component.css']
+  templateUrl: './edit-file.component.html',
+  styleUrls: ['./edit-file.component.css']
 })
-export class EditImageComponent implements OnInit {
+export class EditFileComponent implements OnInit {
   private key: string;
   public imageAlt: string;
   public image: FileUpload;

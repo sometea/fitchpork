@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ListImagesComponent } from './list-images.component';
+import { ListFilesComponent } from './list-files.component';
 import { FilesStorageService } from '../files-storage.service';
 import { Observable } from 'rxjs/Observable';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-describe('ListImagesComponent', () => {
-  let component: ListImagesComponent;
-  let fixture: ComponentFixture<ListImagesComponent>;
+describe('ListFilesComponent', () => {
+  let component: ListFilesComponent;
+  let fixture: ComponentFixture<ListFilesComponent>;
 
   const imagesStorageServiceStub = {
     list: jasmine.createSpy('list').and.returnValue(Observable.of([])),
@@ -18,7 +18,7 @@ describe('ListImagesComponent', () => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [ ListImagesComponent ],
+      declarations: [ ListFilesComponent ],
       providers: [
         { provide: FilesStorageService, useValue: imagesStorageServiceStub },
       ],
@@ -27,7 +27,7 @@ describe('ListImagesComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListImagesComponent);
+    fixture = TestBed.createComponent(ListFilesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

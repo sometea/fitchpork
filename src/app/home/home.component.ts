@@ -4,7 +4,7 @@ import { Article } from "../edit-article/article";
 import { AuthenticationService } from '../authentication.service';
 import { Observable } from 'rxjs/Observable';
 import { FilesStorageService } from '../files-storage.service';
-import { FileUpload } from '../image/image';
+import { FileUpload } from '../edit-file/fileupload';
 import { Router } from '@angular/router';
 
 @Component({

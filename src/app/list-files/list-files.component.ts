@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { FilesStorageService } from '../files-storage.service';
-import { FileUpload, FileUploadWithKey } from '../image/image';
+import { FileUpload, FileUploadWithKey } from '../edit-file/fileupload';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-images',
-  templateUrl: './list-images.component.html',
-  styleUrls: ['./list-images.component.css']
+  templateUrl: './list-files.component.html',
+  styleUrls: ['./list-files.component.css']
 })
-export class ListImagesComponent implements OnInit {
-  public images: Observable<FileUploadWithKey[]>;
+export class ListFilesComponent implements OnInit {
+  public files: Observable<FileUploadWithKey[]>;
   
   constructor(
     private imagesService: FilesStorageService,
@@ -18,7 +18,7 @@ export class ListImagesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.images = this.imagesService.list();
+    this.files = this.imagesService.list();
   }
 
   addImage() {

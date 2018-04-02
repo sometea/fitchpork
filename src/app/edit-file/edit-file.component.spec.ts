@@ -2,16 +2,16 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
-import { EditImageComponent } from './edit-image.component';
+import { EditFileComponent } from './edit-file.component';
 import { FilesStorageService } from '../files-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from "@angular/forms";
-import { FileUpload } from './image';
+import { FileUpload } from './fileupload';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-describe('ImageComponent', () => {
-  let component: EditImageComponent;
-  let fixture: ComponentFixture<EditImageComponent>;
+describe('EditFileComponent', () => {
+  let component: EditFileComponent;
+  let fixture: ComponentFixture<EditFileComponent>;
 
   const ImagesStorageServiceStub = { 
     update: jasmine.createSpy('update').and.returnValue(Observable.of('testFileName')),
@@ -30,7 +30,7 @@ describe('ImageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ FormsModule ],      
-      declarations: [ EditImageComponent ],
+      declarations: [ EditFileComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
         { provide: FilesStorageService, useValue: ImagesStorageServiceStub },
@@ -42,7 +42,7 @@ describe('ImageComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditImageComponent);
+    fixture = TestBed.createComponent(EditFileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

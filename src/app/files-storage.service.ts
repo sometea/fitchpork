@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/first';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { FileUpload, FileUploadWithKey } from './image/image';
+import { FileUpload, FileUploadWithKey } from './edit-file/fileupload';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 import { FirebaseStorage } from '@firebase/storage-types';
 
