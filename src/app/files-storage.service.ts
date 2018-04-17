@@ -20,14 +20,14 @@ export class FilesStorageService {
 
   constructor(private firebaseApp: FirebaseApp, private firebaseDb: AngularFireDatabase) {
     this.storage = firebaseApp.storage();
-    this.filesInDb = this.firebaseDb.list('/images');
+    this.filesInDb = this.firebaseDb.list('/files');
   }
 
-  public add(image: FileUpload, file?: File): Observable<string> {
-    return Observable.fromPromise(this.filesInDb.push(image))
+  public add(fileUpload: FileUpload, file?: File): Observable<string> {
+    return Observable.fromPromise(this.filesInDb.push(fileUpload))
       .flatMap(item => {
         return file ?
-          Observable.fromPromise(this.storage.ref().child(image.filename).put(file)).map(snapshot => item.key) :
+          Observable.fromPromise(this.storage.ref().child(fileUpload.filename).put(file)).map(snapshot => item.key) :
           Observable.of(item.key);
       });
   }
@@ -77,34 +77,34 @@ export class FilesStorageService {
     return this.filesInDb.snapshotChanges().map(actions => actions.map(action => {
       let imageWithKey: FileUploadWithKey = {
         key: action.key,
-        image: action.payload.val()
+        file: action.payload.val()
       };
       return imageWithKey;
      }));
   }
 
   public remove(key: string): Observable<void> {
-    return this.firebaseDb.object<FileUpload>('/images/' + key).valueChanges()
+    return this.firebaseDb.object<FileUpload>('/files/' + key).valueChanges()
       .first()
       .flatMap(image =>
         !image.filename ?
-        Observable.fromPromise(this.firebaseDb.object('/images/' + key).remove()) :
+        Observable.fromPromise(this.firebaseDb.object('/files/' + key).remove()) :
         Observable.fromPromise(Promise.all([
           this.storage.ref().child(image.filename).delete(),
-          this.firebaseDb.object('/images/' + key).remove()
+          this.firebaseDb.object('/files/' + key).remove()
           ])).map(x => null)
       );
   }
 
   public get(key: string): Observable<FileUpload> {
-    return this.firebaseDb.object<FileUpload>('/images/' + key).valueChanges()
-      .flatMap((image: FileUpload) => {
-        return !image.filename ?
-          Observable.of(image) :
-          Observable.fromPromise(this.storage.ref().child(image.filename).getDownloadURL())
+    return this.firebaseDb.object<FileUpload>('/files/' + key).valueChanges()
+      .flatMap((fileUpload: FileUpload) => {
+        return !fileUpload.filename ?
+          Observable.of(fileUpload) :
+          Observable.fromPromise(this.storage.ref().child(fileUpload.filename).getDownloadURL())
             .map(url => {
-              image.url = url;
-              return image;
+              fileUpload.url = url;
+              return fileUpload;
             })
       });
   }

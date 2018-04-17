@@ -1,15 +1,15 @@
-<mat-card class="list-images-card">
+<mat-card class="list-files-card">
   <mat-card-header>
-    <mat-card-title>Images</mat-card-title>
+    <mat-card-title>Files</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-nav-list>
-      <a mat-list-item routerLink="/images/{{image.key}}" *ngFor="let image of images | async">
-        <strong>{{ image.image.title }}</strong>
+      <a mat-list-item routerLink="/files/{{file.key}}" *ngFor="let file of files | async">
+        <strong>{{ file.file.title }}</strong>
       </a>
     </mat-nav-list>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="accent" type="button" (click)="addImage()">Add Image</button>
+    <button mat-raised-button color="accent" type="button" (click)="addFile()">Add File</button>
   </mat-card-actions>
 </mat-card>

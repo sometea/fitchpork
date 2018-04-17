@@ -4,7 +4,7 @@ import { Article } from "../edit-article/article";
 import { AuthenticationService } from '../authentication.service';
 import { Observable } from 'rxjs/Observable';
 import { FilesStorageService } from '../files-storage.service';
-import { FileUpload } from '../edit-file/fileupload';
+import { FileUpload, FileType } from '../edit-file/fileupload';
 import { Router } from '@angular/router';
 
 @Component({
@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
       title: 'A test image',
       filename: '',
       url: '',
+      type: FileType.File,
     };
     this.imagesService.add(image).subscribe(key => this.router.navigate(['/images/' + key]));
   }
