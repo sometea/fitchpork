@@ -1,12 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { FilesStorageService } from './files-storage.service';
-import { FirebaseApp } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 describe('FilesStorageService', () => {
-  const FirebaseAppStub = { 
-    storage: jasmine.createSpy('storage'),
+  const FirebaseStorageStub = {
   };
 
   const FirebaseDbStub = {
@@ -18,7 +17,7 @@ describe('FilesStorageService', () => {
     TestBed.configureTestingModule({
       providers: [
         FilesStorageService,
-        { provide: FirebaseApp, useValue: FirebaseAppStub },
+        { provide: AngularFireStorage, useValue: FirebaseStorageStub },
         { provide: AngularFireDatabase, useValue: FirebaseDbStub },
       ],
     });

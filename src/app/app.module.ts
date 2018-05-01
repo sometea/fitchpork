@@ -35,7 +35,7 @@ export const firebaseConfig = {
   databaseURL: 'https://fitchpork-ae1b0.firebaseio.com',
   storageBucket: 'fitchpork-ae1b0.appspot.com',
   messagingSenderId: '412599837108'
-}
+};
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

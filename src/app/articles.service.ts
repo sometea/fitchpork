@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Article, ArticleWithKey } from "./edit-article/article";
+import { Article, ArticleWithKey } from './edit-article/article';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 
@@ -14,11 +14,10 @@ export class ArticlesService {
 
   list(): Observable<ArticleWithKey[]> {
     return this.items.snapshotChanges().map(actions => actions.map(action => {
-      let articleWithKey: ArticleWithKey = {
+      return {
         key: action.key,
         article: action.payload.val()
       };
-      return articleWithKey;
      }));
   }
 

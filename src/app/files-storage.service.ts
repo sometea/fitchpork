@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { FirebaseApp } from 'angularfire2';
-import 'firebase/storage';
-import { Observable, Observer } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
@@ -12,14 +11,14 @@ import { AngularFireList } from 'angularfire2/database/interfaces';
 import { FirebaseStorage } from '@firebase/storage-types';
 
 import { UploadProgress } from './upload-progress';
+import { Observer } from 'rxjs/Observer';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @Injectable()
 export class FilesStorageService {
-  private storage: FirebaseStorage;
   private filesInDb: AngularFireList<FileUpload>;
 
-  constructor(private firebaseApp: FirebaseApp, private firebaseDb: AngularFireDatabase) {
-    this.storage = firebaseApp.storage();
+  constructor(private storage: AngularFireStorage, private firebaseDb: AngularFireDatabase) {
     this.filesInDb = this.firebaseDb.list('/files');
   }
 
@@ -27,7 +26,7 @@ export class FilesStorageService {
     return Observable.fromPromise(this.filesInDb.push(fileUpload))
       .flatMap(item => {
         return file ?
-          Observable.fromPromise(this.storage.ref().child(fileUpload.filename).put(file)).map(snapshot => item.key) :
+          this.storage.upload(fileUpload.filename, file).snapshotChanges().map(snapshot => item.key) :
           Observable.of(item.key);
       });
   }
@@ -52,34 +51,20 @@ export class FilesStorageService {
     if (oldFilename) {
       this.storage.ref(oldFilename).delete();
     }
-    const uploadTask = this.storage.ref(newFilename).put(file);
-    return Observable.create((observer: Observer<UploadProgress>) => {
-      uploadTask.on('state_changed', (snapshot: any) => {
-        const uploadProgress: UploadProgress = {
-          percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
-          downloadUrl: '',
-        };
-        observer.next(uploadProgress);
-      }, error => {
-        observer.error(error);
-      }, () => {
-        const uploadProgress: UploadProgress = {
-          percentCompleted: 100,
-          downloadUrl: uploadTask.snapshot.downloadURL,
-        }
-        observer.next(uploadProgress);
-        observer.complete();
-      });
+    return this.storage.ref(newFilename).put(file).snapshotChanges().map(snapshot => {
+      return {
+        percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
+        downloadUrl: snapshot.downloadURL ? snapshot.downloadURL : ''
+      };
     });
   }
 
   public list(): Observable<FileUploadWithKey[]> {
     return this.filesInDb.snapshotChanges().map(actions => actions.map(action => {
-      let imageWithKey: FileUploadWithKey = {
+      return {
         key: action.key,
         file: action.payload.val()
       };
-      return imageWithKey;
      }));
   }
 
@@ -90,7 +75,7 @@ export class FilesStorageService {
         !image.filename ?
         Observable.fromPromise(this.firebaseDb.object('/files/' + key).remove()) :
         Observable.fromPromise(Promise.all([
-          this.storage.ref().child(image.filename).delete(),
+          this.storage.ref(image.filename).delete(),
           this.firebaseDb.object('/files/' + key).remove()
           ])).map(x => null)
       );
@@ -101,11 +86,11 @@ export class FilesStorageService {
       .flatMap((fileUpload: FileUpload) => {
         return !fileUpload.filename ?
           Observable.of(fileUpload) :
-          Observable.fromPromise(this.storage.ref().child(fileUpload.filename).getDownloadURL())
+          this.storage.ref(fileUpload.filename).getDownloadURL()
             .map(url => {
               fileUpload.url = url;
               return fileUpload;
-            })
+            });
       });
   }
 }
