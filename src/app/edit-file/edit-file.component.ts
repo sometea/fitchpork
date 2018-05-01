@@ -5,23 +5,23 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { FileUpload } from './fileupload';
 
 @Component({
-  selector: 'app-edit-image',
+  selector: 'app-edit-file',
   templateUrl: './edit-file.component.html',
   styleUrls: ['./edit-file.component.css']
 })
 export class EditFileComponent implements OnInit {
   private key: string;
   public imageAlt: string;
-  public image: FileUpload;
+  public file: FileUpload;
   public uploadPercent: Number;
 
   constructor(
     private imagesStorageService: FilesStorageService,
     private route: ActivatedRoute,
     private router: Router
-  ) { 
+  ) {
     this.imageAlt = 'No image loaded yet!';
-    this.image = new FileUpload();
+    this.file = new FileUpload();
     this.uploadPercent = 0;
   }
 
@@ -30,7 +30,7 @@ export class EditFileComponent implements OnInit {
       this.key = params.get('id');
       return this.imagesStorageService.get(this.key);
     }).subscribe(image => {
-      this.image = image;
+      this.file = image;
     });
   }
 
@@ -38,11 +38,11 @@ export class EditFileComponent implements OnInit {
     if (fileList.length < 0) {
       return;
     }
-    this.image.filename = fileList.item(0).name;
-    this.imagesStorageService.update(this.key, this.image, fileList.item(0))
+    this.file.filename = fileList.item(0).name;
+    this.imagesStorageService.update(this.key, this.file, fileList.item(0))
       .subscribe((uploadProgress: UploadProgress) => {
         if (uploadProgress.downloadUrl) {
-          this.image.url = uploadProgress.downloadUrl;
+          this.file.url = uploadProgress.downloadUrl;
           this.imageAlt = 'image';
         }
         this.uploadPercent = uploadProgress.percentCompleted;
@@ -50,7 +50,7 @@ export class EditFileComponent implements OnInit {
   }
 
   public cancel() {
-    this.imagesStorageService.update(this.key, this.image)
+    this.imagesStorageService.update(this.key, this.file)
       .subscribe(() => {
         this.router.navigate(['/']);
       });

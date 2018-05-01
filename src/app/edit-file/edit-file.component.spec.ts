@@ -5,7 +5,7 @@ import 'rxjs/add/observable/of';
 import { EditFileComponent } from './edit-file.component';
 import { FilesStorageService } from '../files-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { FileUpload } from './fileupload';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -13,7 +13,7 @@ describe('EditFileComponent', () => {
   let component: EditFileComponent;
   let fixture: ComponentFixture<EditFileComponent>;
 
-  const ImagesStorageServiceStub = { 
+  const ImagesStorageServiceStub = {
     update: jasmine.createSpy('update').and.returnValue(Observable.of('testFileName')),
     getUrl: jasmine.createSpy('getUrl').and.returnValue(Observable.of('testUrl')),
     get: jasmine.createSpy('get').and.returnValue(Observable.of(new FileUpload())),
@@ -29,7 +29,7 @@ describe('EditFileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule ],      
+      imports: [ FormsModule ],
       declarations: [ EditFileComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
