@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ListFilesComponent implements OnInit {
   public files: Observable<FileUploadWithKey[]>;
-  
+
   constructor(
     private filesService: FilesStorageService,
     private router: Router
@@ -21,7 +21,7 @@ export class ListFilesComponent implements OnInit {
     this.files = this.filesService.list();
   }
 
-  addImage() {
+  addFile() {
     const file: FileUpload = {
       title: 'A test file',
       filename: '',

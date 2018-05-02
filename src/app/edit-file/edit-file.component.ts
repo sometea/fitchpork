@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FilesStorageService } from '../files-storage.service';
 import { UploadProgress } from '../upload-progress';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { FileUpload } from './fileupload';
+import { FileUpload, FileType } from './fileupload';
 
 @Component({
   selector: 'app-edit-file',
@@ -61,5 +61,9 @@ export class EditFileComponent implements OnInit {
       .subscribe(() => {
         this.router.navigate(['/']);
       });
+  }
+
+  public showImage() {
+    return this.file && this.file.type === FileType.Image;
   }
 }

@@ -1,6 +1,6 @@
 export enum FileType {
-    Image = 'Image',
-    File = 'File',
+    Image = 'image',
+    File = 'file',
 }
 
 export class FileUpload {

@@ -8,17 +8,23 @@
     Current filename: {{ file.filename }}
     <br>
     <button type="button" mat-raised-button (click)="fileInput.click()">Upload a new file</button>
-    <input hidden #fileInput type="file" (change)="handleFiles(fileInput.files)"><br>
+    <input hidden #fileInput type="file" (change)="handleFiles(fileInput.files)">
+    <br>
     <span *ngIf="uploadPercent">Upload {{ uploadPercent }} % completed.</span>
   </p>
   <p>
-    Type: {{ file.type }}
+    <mat-form-field>
+      <mat-select placeholder="File type" [(value)]="file.type">
+        <mat-option value="file">File</mat-option>
+        <mat-option value="image">Image</mat-option>
+      </mat-select>
+    </mat-form-field>
   </p>
   <p>
     URL: {{ file.url }}
   </p>
   <p>
-    <img *ngIf="file.url" [src]="file.url" [alt]="imageAlt">
+    <img *ngIf="showImage()" [src]="file.url" [alt]="imageAlt">
   </p>
   <p>
     <button mat-raised-button color="accent" (click)="cancel()">Back</button>
