@@ -39,22 +39,13 @@ export const firebaseConfig = {
 };
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'articles/:id', component: EditArticleComponent },
-  { path: 'files/:id', component: EditFileComponent },
-  { path: 'files', component: ListFilesComponent },
-  { path: 'articles', component: ListArticlesComponent },
+  { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule' },
+  { path: '', redirectTo: 'admin', pathMatch: 'full' },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditArticleComponent,
-    HomeComponent,
-    ViewArticleComponent,
-    EditFileComponent,
-    ListArticlesComponent,
-    ListFilesComponent,
   ],
   imports: [
     BrowserModule,
