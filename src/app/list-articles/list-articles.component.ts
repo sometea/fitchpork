@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '../articles.service';
-import { ArticleWithKey, Article } from '../edit-article/article';
+import { ArticleWithKey, Article, ArticleType } from '../edit-article/article';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class ListArticlesComponent implements OnInit {
   constructor(
     private articlesService: ArticlesService,
     private router: Router
-  ) { 
+  ) {
     this.articles = articlesService.list();
   }
 
@@ -27,6 +27,7 @@ export class ListArticlesComponent implements OnInit {
       title: 'A new article',
       text: 'This article has just been created',
       date: 'Today',
+      type: ArticleType.News,
     };
     this.articlesService.add(article).subscribe(key => this.router.navigate(['/articles/' + key]));
   }

@@ -4,8 +4,8 @@ import { EditArticleComponent } from './edit-article.component';
 import { AuthenticationService } from '../authentication.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import { Article } from "./article";
-import { FormsModule } from "@angular/forms";
+import { Article, ArticleType } from './article';
+import { FormsModule } from '@angular/forms';
 import { ArticlesService } from '../articles.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -16,7 +16,7 @@ describe('EditArticleComponent', () => {
   let fixture: ComponentFixture<EditArticleComponent>;
 
   const testArticle: Article = {
-    title: '', text: '', date: ''
+    title: '', text: '', date: '', type: ArticleType.News
   };
 
   const articlesServiceStub = {
@@ -36,7 +36,7 @@ describe('EditArticleComponent', () => {
       imports: [ FormsModule, MarkdownModule ],
       declarations: [ EditArticleComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-      providers: [ 
+      providers: [
         { provide: ArticlesService, useValue: articlesServiceStub },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: Router, useValue: {} },

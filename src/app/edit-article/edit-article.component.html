@@ -17,6 +17,17 @@
   <br clear="both">
 
   <p>
+    <mat-form-field>
+      <mat-select placeholder="Article type" [(value)]="article.type">
+        <mat-option value="news">News post</mat-option>
+        <mat-option value="post">Blog post</mat-option>
+        <mat-option value="release">Release</mat-option>
+        <mat-option value="page">Page</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
     <button mat-raised-button color="accent" type="submit">Submit</button>
     <button mat-raised-button color="accent" type="button" (click)="cancel()">Back</button>
     <button mat-raised-button color="accent" type="button" (click)="delete()">Delete</button>

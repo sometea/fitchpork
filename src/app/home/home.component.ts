@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '../articles.service';
-import { Article } from "../edit-article/article";
+import { Article, ArticleType } from '../edit-article/article';
 import { AuthenticationService } from '../authentication.service';
 import { Observable } from 'rxjs/Observable';
 import { FilesStorageService } from '../files-storage.service';
@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  
   constructor(
     private articlesService: ArticlesService,
     private imagesService: FilesStorageService,
@@ -29,6 +28,7 @@ export class HomeComponent implements OnInit {
       title: 'A new article',
       text: 'This article has just been created',
       date: 'Today',
+      type: ArticleType.News,
     };
     this.articlesService.add(article).subscribe(key => this.router.navigate(['/articles/' + key]));
   }
