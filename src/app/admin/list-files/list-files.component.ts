@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { FilesStorageService } from '../files-storage.service';
+import { FilesStorageService } from '../../files-storage.service';
 import { FileUpload, FileUploadWithKey, FileType } from '../edit-file/fileupload';
 import { Router } from '@angular/router';
 

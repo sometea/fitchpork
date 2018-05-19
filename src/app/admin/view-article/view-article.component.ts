@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Article } from '../edit-article/article';
 import { Observable } from 'rxjs/Observable';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../../authentication.service';
 
 @Component({
   selector: 'app-view-article',

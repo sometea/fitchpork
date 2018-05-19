@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { ArticlesService } from './articles.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseApp } from 'angularfire2';
-import { AngularFireDatabase } from "angularfire2/database";
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from './authentication.service';
 import { FilesStorageService } from './files-storage.service';
@@ -25,7 +25,6 @@ describe('AppComponent', () => {
   };
 
   const imagesStorageServiceStub = {
-    
   };
 
   beforeEach(async(() => {

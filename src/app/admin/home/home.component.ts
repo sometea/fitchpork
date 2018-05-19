@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticlesService } from '../articles.service';
+import { ArticlesService } from '../../articles.service';
 import { Article, ArticleType } from '../edit-article/article';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../../authentication.service';
 import { Observable } from 'rxjs/Observable';
-import { FilesStorageService } from '../files-storage.service';
+import { FilesStorageService } from '../../files-storage.service';
 import { FileUpload, FileType } from '../edit-file/fileupload';
 import { Router } from '@angular/router';
 

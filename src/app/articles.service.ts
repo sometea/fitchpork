@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Article, ArticleWithKey } from './edit-article/article';
+import { Article, ArticleWithKey } from './admin/edit-article/article';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 

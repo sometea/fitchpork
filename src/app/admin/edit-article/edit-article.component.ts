@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Article } from './article';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../../authentication.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import * as firebase from 'firebase/app';
-import { ArticlesService } from '../articles.service';
+import { ArticlesService } from '../../articles.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FilesStorageService } from '../files-storage.service';
-import { UploadProgress } from '../upload-progress';
+import { FilesStorageService } from '../../files-storage.service';
+import { UploadProgress } from '../../upload-progress';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { FileUpload, FileType } from './fileupload';
 

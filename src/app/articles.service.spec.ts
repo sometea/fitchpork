@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ArticlesService } from './articles.service';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Article } from './edit-article/article';
+import { Article } from './admin/edit-article/article';
 
 describe('ArticlesService', () => {
   beforeEach(() => {
