@@ -19,6 +19,7 @@ import { ViewArticleComponent } from './view-article/view-article.component';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { EditFileComponent } from './edit-file/edit-file.component';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { ListArticlesComponent } from './list-articles/list-articles.component';
     ListArticlesComponent,
     ListFilesComponent,
     ViewArticleComponent,
+    MainComponent,
   ]
 })
 export class AdminModule { }
