@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { MarkdownModule } from 'ngx-md';
+import { NgxMdModule } from 'ngx-md';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,7 +26,7 @@ import { MainComponent } from './main/main.component';
     CommonModule,
     AdminRoutingModule,
     FormsModule,
-    MarkdownModule.forRoot(),
+    NgxMdModule.forRoot(),
     MatListModule,
     MatButtonModule,
     MatFormFieldModule,

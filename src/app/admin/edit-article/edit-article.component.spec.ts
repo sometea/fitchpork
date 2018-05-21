@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { ArticlesService } from '../../articles.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MarkdownModule } from 'ngx-md';
 
 describe('EditArticleComponent', () => {
   let component: EditArticleComponent;
@@ -33,7 +32,7 @@ describe('EditArticleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, MarkdownModule ],
+      imports: [ FormsModule ],
       declarations: [ EditArticleComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [

@@ -51,12 +51,13 @@ export class FilesStorageService {
     if (oldFilename) {
       this.storage.ref(oldFilename).delete();
     }
-    return this.storage.ref(newFilename).put(file).snapshotChanges().map(snapshot => {
-      return {
-        percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
-        downloadUrl: snapshot.downloadURL ? snapshot.downloadURL : ''
-      };
-    });
+    return this.storage.ref(newFilename).put(file).snapshotChanges()
+      .flatMap(snapshot => Observable.fromPromise(snapshot.ref.getDownloadURL()).map(url => {
+        return {
+          percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
+          downloadUrl: url
+        };
+      }));
   }
 
   public list(): Observable<FileUploadWithKey[]> {
@@ -65,7 +66,7 @@ export class FilesStorageService {
         key: action.key,
         file: action.payload.val()
       };
-     }));
+    }));
   }
 
   public remove(key: string): Observable<void> {
@@ -73,10 +74,10 @@ export class FilesStorageService {
       .first()
       .flatMap(image =>
         !image.filename ?
-        Observable.fromPromise(this.firebaseDb.object('/files/' + key).remove()) :
-        Observable.fromPromise(Promise.all([
-          this.storage.ref(image.filename).delete(),
-          this.firebaseDb.object('/files/' + key).remove()
+          Observable.fromPromise(this.firebaseDb.object('/files/' + key).remove()) :
+          Observable.fromPromise(Promise.all([
+            this.storage.ref(image.filename).delete(),
+            this.firebaseDb.object('/files/' + key).remove()
           ])).map(x => null)
       );
   }
