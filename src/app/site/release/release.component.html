@@ -1,0 +1,11 @@
+<div *ngIf="release | async">
+  <p>{{ (release | async)?.title }} - {{ (release | async)?.updatedAt | date:mediumDate }}</p>
+  <p>
+      <img [src]="(release | async)?.cover?.url" [alt]="(release | async)?.cover?.originalname"/>
+  </p>
+  <p>
+      File Download:<br/>
+      <a *ngIf="(release | async)?.flacDownload" [href]="(release | async)?.flacDownload?.url">Flac Download</a><br/>
+      <a *ngIf="(release | async)?.mp3Download" [href]="(release | async)?.mp3Download?.url">Mp3 Download</a><br/>
+  </p>
+</div>

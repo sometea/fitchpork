@@ -1,0 +1,52 @@
+body {
+    font: 12px/18px "Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif;
+    color: black;
+}
+
+#outercontainer {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  width: 71em;
+}
+
+#outerrow {
+    border: 1px solid black;
+    display: flex;
+}
+
+#rightcolumn {
+    flex: 1;
+    border-left: 1px solid black;
+}
+
+#leftcolumn {
+    flex: 1;
+}
+
+#logorow {
+    border-bottom: 1px solid black;
+    padding: 1em;
+}
+
+#menurow {
+    border-bottom: 1px solid black;
+}
+
+#menu {
+    padding: 4em;
+}
+
+#leftcontent {
+    padding: 1em;
+}
+
+a {
+    text-decoration: underline;
+    color: black;
+}
+
+#menu a {
+    margin-right: 3em;
+}
