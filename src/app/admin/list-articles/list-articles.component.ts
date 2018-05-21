@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticlesService } from '../articles.service';
+import { ArticlesService } from '../../articles.service';
 import { ArticleWithKey, Article, ArticleType } from '../edit-article/article';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';

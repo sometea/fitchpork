@@ -2,10 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 
 import { HomeComponent } from './home.component';
-import { ArticlesService } from '../articles.service';
+import { ArticlesService } from '../../articles.service';
 import { FormsModule } from '@angular/forms/';
-import { FilesStorageService } from '../files-storage.service';
-import { AuthenticationService } from '../authentication.service';
+import { FilesStorageService } from '../../files-storage.service';
+import { AuthenticationService } from '../../authentication.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -31,7 +31,7 @@ describe('HomeComponent', () => {
         FormsModule,
         RouterTestingModule,
       ],
-      declarations: [ 
+      declarations: [
         HomeComponent,
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

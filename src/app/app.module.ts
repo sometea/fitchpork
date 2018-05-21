@@ -1,34 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
-import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 import { AngularFireModule, FirebaseApp } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 
-import { MarkdownModule } from 'ngx-md';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
-import { EditArticleComponent } from './edit-article/edit-article.component';
+import { EditArticleComponent } from './admin/edit-article/edit-article.component';
 import { ArticlesService } from './articles.service';
 import { AuthenticationService } from './authentication.service';
-import { HomeComponent } from './home/home.component';
-import { ViewArticleComponent } from './view-article/view-article.component';
-import { EditFileComponent } from './edit-file/edit-file.component';
+import { HomeComponent } from './admin/home/home.component';
+import { ViewArticleComponent } from './admin/view-article/view-article.component';
+import { EditFileComponent } from './admin/edit-file/edit-file.component';
 import { FilesStorageService } from './files-storage.service';
-import { ListArticlesComponent } from './list-articles/list-articles.component';
-import { ListFilesComponent } from './list-files/list-files.component';
+import { ListArticlesComponent } from './admin/list-articles/list-articles.component';
+import { ListFilesComponent } from './admin/list-files/list-files.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAb1sj2z72ouD3rxTJ7Vm-Dp6N8QY1LfHI',
@@ -39,41 +34,27 @@ export const firebaseConfig = {
 };
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'articles/:id', component: EditArticleComponent },
-  { path: 'files/:id', component: EditFileComponent },
-  { path: 'files', component: ListFilesComponent },
-  { path: 'articles', component: ListArticlesComponent },
+  { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule' },
+  { path: '', redirectTo: 'admin', pathMatch: 'full' },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditArticleComponent,
-    HomeComponent,
-    ViewArticleComponent,
-    EditFileComponent,
-    ListArticlesComponent,
-    ListFilesComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    MarkdownModule.forRoot(),
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    MatListModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSidenavModule,
+    FormsModule,
     MatToolbarModule,
-    MatCardModule,
+    MatFormFieldModule,
+    MatSidenavModule,
+    MatInputModule,
   ],
   providers: [
     ArticlesService,

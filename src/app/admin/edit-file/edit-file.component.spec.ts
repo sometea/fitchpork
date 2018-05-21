@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import { EditFileComponent } from './edit-file.component';
-import { FilesStorageService } from '../files-storage.service';
+import { FilesStorageService } from '../../files-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FileUpload } from './fileupload';

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ListFilesComponent } from './list-files.component';
-import { FilesStorageService } from '../files-storage.service';
+import { FilesStorageService } from '../../files-storage.service';
 import { Observable } from 'rxjs/Observable';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
