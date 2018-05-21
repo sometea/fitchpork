@@ -35,7 +35,7 @@ export const firebaseConfig = {
 
 const routes: Routes = [
   { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule' },
-  { path: '', redirectTo: 'admin', pathMatch: 'full' },
+  { path: '', loadChildren: 'app/site/site.module#SiteModule' },
 ];
 
 @NgModule({
