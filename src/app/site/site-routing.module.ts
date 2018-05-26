@@ -4,13 +4,20 @@ import { PostsComponent } from './posts/posts.component';
 import { StaticpageComponent } from './staticpage/staticpage.component';
 import { ReleasesComponent } from './releases/releases.component';
 import { ReleaseComponent } from './release/release.component';
+import { SiteComponent } from './site/site.component';
 
 const routes: Routes = [
-  { path: 'posts', component: PostsComponent },
-  { path: '', redirectTo: 'posts' },
-  { path: 'prinzipien', component: StaticpageComponent },
-  { path: 'releases', component: ReleasesComponent },
-  { path: 'releases/:id', component: ReleaseComponent }
+  {
+    path: '',
+    component: SiteComponent,
+    children: [
+      { path: '', redirectTo: 'posts' },
+      { path: 'posts', component: PostsComponent },
+      { path: 'prinzipien', component: StaticpageComponent },
+      { path: 'releases', component: ReleasesComponent },
+      { path: 'releases/:id', component: ReleaseComponent }
+    ]
+  },
 ];
 
 @NgModule({
