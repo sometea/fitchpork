@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-card-content>
     <mat-nav-list>
-      <a mat-list-item routerLink="/articles/{{article.key}}" *ngFor="let article of articles | async">
+      <a mat-list-item routerLink="{{article.key}}" *ngFor="let article of articles | async">
         <strong>{{ article.article.title }}</strong>&nbsp;- {{ article.article.date }}
       </a>
     </mat-nav-list>

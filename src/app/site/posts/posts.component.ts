@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticlesService } from '../../articles.service';
+import { Observable } from 'rxjs';
+import { ArticleWithKey } from '../../admin/edit-article/article';
 
 @Component({
   selector: 'app-posts',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
+  private posts: Observable<ArticleWithKey[]>;
 
-  constructor() { }
+  constructor(private articlesService: ArticlesService) { }
 
   ngOnInit() {
+    this.posts = this.articlesService.list();
   }
 
 }

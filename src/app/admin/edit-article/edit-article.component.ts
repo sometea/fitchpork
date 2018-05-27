@@ -33,15 +33,15 @@ export class EditArticleComponent implements OnInit {
 
   public submit() {
     this.articlesService.update(this.key, this.article);
-    this.router.navigate(['/']);
+    this.router.navigate(['/admin']);
   }
 
   public cancel() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/admin']);
   }
 
   public delete() {
     this.articlesService.remove(this.key);
-    this.router.navigate(['/']);
+    this.router.navigate(['/admin']);
   }
 }
