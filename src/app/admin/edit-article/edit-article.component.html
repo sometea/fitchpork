@@ -28,6 +28,12 @@
   </p>
 
   <p>
+    <mat-form-field>
+      <input matInput placeholder="Link to thumbnail image" [(ngModel)]="article.thumbnail" name="thumbnail">
+    </mat-form-field>
+  </p>
+
+  <p>
     <button mat-raised-button color="accent" type="submit">Submit</button>
     <button mat-raised-button color="accent" type="button" (click)="cancel()">Back</button>
     <button mat-raised-button color="accent" type="button" (click)="delete()">Delete</button>

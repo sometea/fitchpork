@@ -10,6 +10,7 @@ export class Article {
     date: string;
     type: ArticleType;
     text: string;
+    thumbnail: string;
 }
 
 export class ArticleWithKey {

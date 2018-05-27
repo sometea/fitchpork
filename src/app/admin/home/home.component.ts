@@ -22,24 +22,4 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  addArticle() {
-    const article: Article = {
-      title: 'A new article',
-      text: 'This article has just been created',
-      date: 'Today',
-      type: ArticleType.News,
-    };
-    this.articlesService.add(article).subscribe(key => this.router.navigate(['/articles/' + key]));
-  }
-
-  addImage() {
-    const image: FileUpload = {
-      title: 'A test image',
-      filename: '',
-      url: '',
-      type: FileType.File,
-    };
-    this.imagesService.add(image).subscribe(key => this.router.navigate(['/images/' + key]));
-  }
 }

@@ -15,7 +15,7 @@ describe('EditArticleComponent', () => {
   let fixture: ComponentFixture<EditArticleComponent>;
 
   const testArticle: Article = {
-    title: '', text: '', date: '', type: ArticleType.News
+    title: '', text: '', date: '', type: ArticleType.News, thumbnail: ''
   };
 
   const articlesServiceStub = {

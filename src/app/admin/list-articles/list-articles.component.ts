@@ -28,6 +28,7 @@ export class ListArticlesComponent implements OnInit {
       text: 'This article has just been created',
       date: 'Today',
       type: ArticleType.News,
+      thumbnail: '',
     };
     this.articlesService.add(article).subscribe(key => this.router.navigate(['/articles/' + key]));
   }
