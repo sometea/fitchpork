@@ -52,14 +52,14 @@ export class EditFileComponent implements OnInit {
   public cancel() {
     this.imagesStorageService.update(this.key, this.file)
       .subscribe(() => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/admin']);
       });
   }
 
   public delete() {
     this.imagesStorageService.remove(this.key)
       .subscribe(() => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/admin']);
       });
   }
 

@@ -13,7 +13,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
   styleUrls: ['./edit-article.component.css']
 })
 export class EditArticleComponent implements OnInit {
-  public article: Article;
+  private article: Article;
   private key: string;
 
   constructor(

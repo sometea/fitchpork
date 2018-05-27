@@ -4,13 +4,13 @@
   </mat-card-header>
   <mat-card-content>
     <mat-nav-list>
-      <a mat-list-item routerLink="/files/{{file.key}}" *ngFor="let file of files | async">
+      <a mat-list-item routerLink="{{ file.key }}" *ngFor="let file of files | async">
         <strong>{{ file.file.title }}</strong>
       </a>
     </mat-nav-list>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="accent" type="button" routerLink="/">Back</button>
+    <button mat-raised-button color="accent" type="button" routerLink="/admin">Back</button>
     <button mat-raised-button color="accent" type="button" (click)="addFile()">Add File</button>
   </mat-card-actions>
 </mat-card>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '../../articles.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { ArticleWithKey, ArticleType } from '../../admin/edit-article/article';
 
 @Component({
