@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Article, ArticleWithKey } from './admin/edit-article/article';
+import { Article, ArticleWithKey, ArticleType } from './admin/edit-article/article';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 
+const path = '/articles';
+
 @Injectable()
 export class ArticlesService {
-  private items: AngularFireList<Article>;
+  constructor(private af: AngularFireDatabase) {}
 
-  constructor(private af: AngularFireDatabase) {
-    this.items = this.af.list<Article>('/articles', ref => ref.limitToFirst(10));
-  }
-
-  list(): Observable<ArticleWithKey[]> {
-    return this.items.snapshotChanges().map(actions => actions.map(action => {
+  list(type?: ArticleType): Observable<ArticleWithKey[]> {
+    const items = type ?
+      this.af.list<Article>(path, ref => ref.limitToFirst(10).orderByChild('type').equalTo(type)) :
+      this.af.list<Article>(path, ref => ref.limitToFirst(10));
+    return items.snapshotChanges().map(actions => actions.map(action => {
       return {
         key: action.key,
         article: action.payload.val()
@@ -26,14 +27,18 @@ export class ArticlesService {
   }
 
   add(article: Article): Observable<string> {
-    return Observable.fromPromise(this.items.push(article)).map(item => item.key);
+    return Observable.fromPromise(this.items().push(article)).map(item => item.key);
   }
 
   remove(key: string) {
-    this.items.remove(key);
+    this.items().remove(key);
   }
 
   update(key: string, newArticle: Article) {
-    this.items.update(key, newArticle);
+    this.items().update(key, newArticle);
+  }
+
+  private items(): AngularFireList<Article> {
+    return this.af.list<Article>(path, ref => ref.limitToFirst(10));
   }
 }
