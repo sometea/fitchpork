@@ -26,7 +26,7 @@ export class ListArticlesComponent implements OnInit {
     const article: Article = {
       title: 'A new article',
       text: 'This article has just been created',
-      date: 'Today',
+      date: (new Date()).toString(),
       type: ArticleType.News,
       thumbnail: '',
     };

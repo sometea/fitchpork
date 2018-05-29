@@ -32,6 +32,7 @@ export class EditArticleComponent implements OnInit {
   }
 
   public submit() {
+    this.article.date = (new Date()).toString();
     this.articlesService.update(this.key, this.article);
     this.router.navigate(['/admin']);
   }
