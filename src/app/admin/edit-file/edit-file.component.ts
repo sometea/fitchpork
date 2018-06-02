@@ -16,7 +16,7 @@ export class EditFileComponent implements OnInit {
   public uploadPercent: Number;
 
   constructor(
-    private imagesStorageService: FilesStorageService,
+    private filesStorageService: FilesStorageService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -28,7 +28,7 @@ export class EditFileComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.switchMap((params: ParamMap) => {
       this.key = params.get('id');
-      return this.imagesStorageService.get(this.key);
+      return this.filesStorageService.get(this.key);
     }).subscribe(image => {
       this.file = image;
     });
@@ -39,11 +39,9 @@ export class EditFileComponent implements OnInit {
       return;
     }
     this.file.filename = fileList.item(0).name;
-    this.imagesStorageService.update(this.key, this.file, fileList.item(0))
+    this.filesStorageService.update(this.key, this.file, fileList.item(0))
       .subscribe((uploadProgress: UploadProgress) => {
-        console.log('uploadProgress recieved');
         if (uploadProgress.downloadUrl) {
-          console.log('download url received');
           this.file.url = uploadProgress.downloadUrl;
           this.imageAlt = 'image';
         }
@@ -56,14 +54,14 @@ export class EditFileComponent implements OnInit {
   }
 
   public submit() {
-    this.imagesStorageService.update(this.key, this.file)
+    this.filesStorageService.update(this.key, this.file)
       .subscribe(() => {
         this.router.navigate(['/admin/files']);
       });
   }
 
   public delete() {
-    this.imagesStorageService.remove(this.key)
+    this.filesStorageService.remove(this.key)
       .subscribe(() => {
         this.router.navigate(['/admin/files']);
       });

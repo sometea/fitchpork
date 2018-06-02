@@ -53,14 +53,13 @@ export class FilesStorageService {
     }
     return this.storage.ref(newFilename).put(file).snapshotChanges()
       .flatMap(snapshot => {
-        console.log('snapshot changes received');
-        if (snapshot.bytesTransferred === snapshot.totalBytes) {
+        if (snapshot.bytesTransferred < snapshot.totalBytes) {
           return Observable.of({
             percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
             downloadUrl: '',
           });
         }
-        return Observable.fromPromise(snapshot.ref.getDownloadURL()).map(url => {
+        return Observable.fromPromise(snapshot.ref.getDownloadURL()).take(1).map(url => {
           return {
             percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
             downloadUrl: url,
@@ -91,10 +90,8 @@ export class FilesStorageService {
   }
 
   public get(key: string): Observable<FileUpload> {
-    console.log('get called');
     return this.firebaseDb.object<FileUpload>('/files/' + key).valueChanges().take(1)
       .flatMap((fileUpload: FileUpload) => {
-        console.log('valueChanges received');
         return !fileUpload.filename ?
           Observable.of(fileUpload) :
           this.storage.ref(fileUpload.filename).getDownloadURL()
