@@ -41,7 +41,9 @@ export class EditFileComponent implements OnInit {
     this.file.filename = fileList.item(0).name;
     this.imagesStorageService.update(this.key, this.file, fileList.item(0))
       .subscribe((uploadProgress: UploadProgress) => {
+        console.log('uploadProgress recieved');
         if (uploadProgress.downloadUrl) {
+          console.log('download url received');
           this.file.url = uploadProgress.downloadUrl;
           this.imageAlt = 'image';
         }
@@ -50,16 +52,20 @@ export class EditFileComponent implements OnInit {
   }
 
   public cancel() {
+    this.router.navigate(['/admin/files']);
+  }
+
+  public submit() {
     this.imagesStorageService.update(this.key, this.file)
       .subscribe(() => {
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/admin/files']);
       });
   }
 
   public delete() {
     this.imagesStorageService.remove(this.key)
       .subscribe(() => {
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/admin/files']);
       });
   }
 

@@ -28,6 +28,6 @@ export class ListFilesComponent implements OnInit {
       url: '',
       type: FileType.File
     };
-    this.filesService.add(file).subscribe(key => this.router.navigate(['/files/' + key]));
+    this.filesService.add(file).subscribe(key => this.router.navigate(['/admin/files/' + key]));
   }
 }

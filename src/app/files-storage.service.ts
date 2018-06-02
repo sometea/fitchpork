@@ -3,8 +3,8 @@ import { FirebaseApp } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/first';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FileUpload, FileUploadWithKey } from './admin/edit-file/fileupload';
 import { AngularFireList } from 'angularfire2/database/interfaces';
@@ -26,7 +26,7 @@ export class FilesStorageService {
     return Observable.fromPromise(this.filesInDb.push(fileUpload))
       .flatMap(item => {
         return file ?
-          this.storage.upload(fileUpload.filename, file).snapshotChanges().map(snapshot => item.key) :
+          this.storage.upload(fileUpload.filename, file).snapshotChanges().take(1).map(snapshot => item.key) :
           Observable.of(item.key);
       });
   }
@@ -36,7 +36,7 @@ export class FilesStorageService {
       percentCompleted: 100,
       downloadUrl: '',
     };
-    return this.get(key).first().flatMap(oldImage => {
+    return this.get(key).take(1).flatMap(oldImage => {
       return Observable.fromPromise(this.filesInDb.update(key, image))
         .flatMap(() => {
           if (!file) {
@@ -52,12 +52,21 @@ export class FilesStorageService {
       this.storage.ref(oldFilename).delete();
     }
     return this.storage.ref(newFilename).put(file).snapshotChanges()
-      .flatMap(snapshot => Observable.fromPromise(snapshot.ref.getDownloadURL()).map(url => {
-        return {
-          percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
-          downloadUrl: url
-        };
-      }));
+      .flatMap(snapshot => {
+        console.log('snapshot changes received');
+        if (snapshot.bytesTransferred === snapshot.totalBytes) {
+          return Observable.of({
+            percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
+            downloadUrl: '',
+          });
+        }
+        return Observable.fromPromise(snapshot.ref.getDownloadURL()).map(url => {
+          return {
+            percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
+            downloadUrl: url,
+          }
+        });
+      });
   }
 
   public list(): Observable<FileUploadWithKey[]> {
@@ -70,8 +79,7 @@ export class FilesStorageService {
   }
 
   public remove(key: string): Observable<void> {
-    return this.firebaseDb.object<FileUpload>('/files/' + key).valueChanges()
-      .first()
+    return this.firebaseDb.object<FileUpload>('/files/' + key).valueChanges().take(1)
       .flatMap(image =>
         !image.filename ?
           Observable.fromPromise(this.firebaseDb.object('/files/' + key).remove()) :
@@ -83,8 +91,10 @@ export class FilesStorageService {
   }
 
   public get(key: string): Observable<FileUpload> {
-    return this.firebaseDb.object<FileUpload>('/files/' + key).valueChanges()
+    console.log('get called');
+    return this.firebaseDb.object<FileUpload>('/files/' + key).valueChanges().take(1)
       .flatMap((fileUpload: FileUpload) => {
+        console.log('valueChanges received');
         return !fileUpload.filename ?
           Observable.of(fileUpload) :
           this.storage.ref(fileUpload.filename).getDownloadURL()

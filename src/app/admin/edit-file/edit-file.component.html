@@ -27,6 +27,7 @@
     <img *ngIf="showImage()" [src]="file.url" [alt]="imageAlt">
   </p>
   <p>
+    <button mat-raised-button color="accent" (click)="submit()">Submit</button>
     <button mat-raised-button color="accent" (click)="cancel()">Back</button>
     <button mat-raised-button color="accent" (click)="delete()">Delete</button>
   </p>
