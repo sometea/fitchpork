@@ -9,7 +9,7 @@ import { ArticleWithKey, ArticleType } from '../../admin/edit-article/article';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  private posts: Observable<ArticleWithKey[]>;
+  public posts: Observable<ArticleWithKey[]>;
 
   constructor(private articlesService: ArticlesService) { }
 

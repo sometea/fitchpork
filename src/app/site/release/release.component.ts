@@ -10,8 +10,8 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./release.component.css']
 })
 export class ReleaseComponent implements OnInit {
-  private key: string;
-  private release: Article;
+  public key: string;
+  public release: Article;
 
   constructor(
     private articlesService: ArticlesService,
