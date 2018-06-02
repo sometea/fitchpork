@@ -51,7 +51,16 @@ export class FilesStorageService {
     if (oldFilename) {
       this.storage.ref(oldFilename).delete();
     }
-    return this.storage.ref(newFilename).put(file).snapshotChanges()
+    const uploadTask = this.storage.ref(newFilename).put(file);
+    const finalObservable = Observable.fromPromise(uploadTask.then()).flatMap(() => {
+      return this.storage.ref(newFilename).getDownloadURL().map(url => {
+        return {
+          percentCompleted: 100,
+          downloadUrl: url,
+        }
+      })
+    });
+    return uploadTask.snapshotChanges()
       .flatMap(snapshot => {
         if (snapshot.bytesTransferred < snapshot.totalBytes) {
           return Observable.of({
@@ -59,12 +68,7 @@ export class FilesStorageService {
             downloadUrl: '',
           });
         }
-        return Observable.fromPromise(snapshot.ref.getDownloadURL()).take(1).map(url => {
-          return {
-            percentCompleted: Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100),
-            downloadUrl: url,
-          }
-        });
+        return finalObservable;
       });
   }
 
