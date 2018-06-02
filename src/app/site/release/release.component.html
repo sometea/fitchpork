@@ -1,4 +1,4 @@
 <div *ngIf="release">
-  <p>{{ release?.title }} - {{ release?.updatedAt | date:mediumDate }}</p>
+  <p>{{ release?.title }} - {{ release?.date | date:mediumDate }}</p>
   <ngx-md [data]="release.text"></ngx-md>
 </div>

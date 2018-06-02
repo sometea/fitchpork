@@ -30,6 +30,6 @@ export class ListArticlesComponent implements OnInit {
       type: ArticleType.News,
       thumbnail: '',
     };
-    this.articlesService.add(article).subscribe(key => this.router.navigate(['/articles/' + key]));
+    this.articlesService.add(article).subscribe(key => this.router.navigate(['/admin/articles/' + key]));
   }
 }

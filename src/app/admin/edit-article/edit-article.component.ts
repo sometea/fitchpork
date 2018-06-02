@@ -34,15 +34,15 @@ export class EditArticleComponent implements OnInit {
   public submit() {
     this.article.date = (new Date()).toString();
     this.articlesService.update(this.key, this.article);
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin/articles']);
   }
 
   public cancel() {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin/articles']);
   }
 
   public delete() {
     this.articlesService.remove(this.key);
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin/articles']);
   }
 }
