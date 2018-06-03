@@ -1,6 +1,6 @@
 <p>Releases.</p>
 <div class="release" *ngFor="let release of releases | async">
-    <a style="cursor: pointer" routerLink="{{ release.key }}">
+    <a routerLink="{{ release.key }}">
         <img [src]="release.article.thumbnail" alt="release thumbnail" />
     </a>
 </div>
